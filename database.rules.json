@@ -49,7 +49,6 @@
     "sos": {
       ".read": "auth != null",
       "$sosId": {
-        "//": "create-only — an SOS alert, once written, can't be edited or deleted by a client",
         ".write": "auth != null && !data.exists()",
         ".validate": "newData.hasChildren(['rider','rideCode','time'])",
         "rider": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length < 60" },
