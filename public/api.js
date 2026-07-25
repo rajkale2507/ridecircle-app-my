@@ -13,7 +13,7 @@ const RC_API = {
   _apiBase: (() => {
     const host = window.location.hostname;
     const isLocal = host === "localhost" || host === "127.0.0.1" || host === "";
-    return isLocal ? "" : "https://ridecircle-api.onrender.com";
+	    return isLocal ? "" : "https://ridecircle-app-my.onrender.com";
   })(),
 
   async _call(method, path, body) {
