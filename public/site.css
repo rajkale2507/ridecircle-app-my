@@ -1,0 +1,507 @@
+/* ==========================================================
+   RideCircle — SHARED SITE STYLES
+   Header, footer, buttons, badges, cards used on every page.
+   Page-specific CSS files load AFTER this one.
+========================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+:root{
+    --bg:#0b0b0b;
+    --bg-alt:#0d1117;
+    --panel:#161616;
+    --panel-alt:#181414;
+    --border:rgba(255,255,255,.08);
+    --orange:#ff8c00;
+    --orange-soft:#ff7b00;
+    --text-dim:#9ca3af;
+    --text-dimmer:#7e8698;
+}
+
+body{
+    background:var(--bg);
+    color:white;
+    overflow-x:hidden;
+}
+
+a{ color:inherit; }
+
+/* ================= HEADER ================= */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+
+    padding:18px 60px;
+
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(12px);
+
+    z-index:1000;
+}
+
+.logo{
+    justify-self:start;
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    color:white;
+    font-size:26px;
+    font-weight:700;
+}
+
+.logo i{
+    color:var(--orange);
+    font-size:18px;
+}
+
+nav{
+    justify-self:center;
+    display:flex;
+    gap:12px;
+}
+
+nav a{
+    text-decoration:none;
+    color:white;
+    font-size:15px;
+    padding:10px 18px;
+    border-radius:12px;
+    transition:.3s;
+}
+
+nav a:hover,
+nav a.active{
+    color:var(--orange);
+    background:rgba(255,140,0,.15);
+}
+
+.buttons{
+    justify-self:end;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.login{
+    background:transparent;
+    color:white;
+    border:1px solid rgba(255,255,255,.25);
+    padding:10px 22px;
+    border-radius:30px;
+    cursor:pointer;
+    transition:.3s;
+    font-size:15px;
+    text-decoration:none;
+    display:inline-block;
+}
+
+.login:hover{
+    border-color:var(--orange);
+    color:var(--orange);
+}
+
+.signup{
+    background:var(--orange);
+    color:white;
+    border:none;
+    padding:10px 22px;
+    border-radius:30px;
+    cursor:pointer;
+    transition:.3s;
+    font-size:15px;
+    text-decoration:none;
+    display:inline-block;
+}
+
+.signup:hover{
+    background:#ff9c1a;
+}
+
+.avatar-chip{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:var(--orange);
+    color:#1a0f00;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    font-size:14px;
+    text-decoration:none;
+}
+
+/* ================= PAGE HERO (title block used on inner pages) ================= */
+
+.page-hero{
+    padding:150px 8% 50px;
+}
+
+.page-hero .eyebrow{
+    display:inline-block;
+    padding:8px 20px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:30px;
+    color:var(--orange);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:1px;
+    margin-bottom:18px;
+}
+
+.page-hero h1{
+    font-size:44px;
+    font-weight:700;
+    color:#fff;
+}
+
+.page-hero h1 span{
+    color:var(--orange);
+}
+
+.page-hero p{
+    margin-top:12px;
+    font-size:16px;
+    color:#a8a8a8;
+    max-width:600px;
+}
+
+.page-hero .live-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:20px;
+    padding:8px 16px;
+    background:rgba(74,222,128,.12);
+    border:1px solid rgba(74,222,128,.35);
+    border-radius:30px;
+    color:#4ade80;
+    font-size:13px;
+    font-weight:600;
+}
+
+.live-pill .dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#4ade80;
+    box-shadow:0 0 0 0 rgba(74,222,128,.6);
+    animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(74,222,128,.5); }
+    70%{ box-shadow:0 0 0 8px rgba(74,222,128,0); }
+    100%{ box-shadow:0 0 0 0 rgba(74,222,128,0); }
+}
+
+/* ================= STAT STRIP (reused on Home / Community / Live Tracking / Profile) ================= */
+
+.stat-strip{
+    display:grid;
+    gap:20px;
+    padding:0 8% 40px;
+}
+
+.stat-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:22px 24px;
+    transition:.3s;
+}
+
+.stat-card:hover{
+    border-color:var(--orange);
+    transform:translateY(-4px);
+}
+
+.stat-card h2{
+    font-size:32px;
+    font-weight:800;
+    margin-bottom:6px;
+}
+
+.stat-card p{
+    color:var(--text-dim);
+    font-size:14px;
+}
+
+.stat-card.orange h2{ color:var(--orange-soft); }
+.stat-card.blue h2{ color:#3b82f6; }
+.stat-card.green h2{ color:#4ade80; }
+.stat-card.purple h2{ color:#b86cff; }
+
+/* ================= GENERIC BUTTONS ================= */
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:13px 26px;
+    border-radius:12px;
+    border:none;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    text-decoration:none;
+}
+
+.btn-orange{
+    background:var(--orange);
+    color:white;
+}
+.btn-orange:hover{
+    background:#ff9d1f;
+    transform:translateY(-2px);
+}
+
+.btn-outline{
+    background:transparent;
+    color:white;
+    border:1px solid rgba(255,255,255,.25);
+}
+.btn-outline:hover{
+    border-color:var(--orange);
+    color:var(--orange);
+}
+
+.btn-full{ width:100%; }
+
+/* ================= FILTER CHIPS ================= */
+
+.chip-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.chip{
+    padding:9px 20px;
+    border-radius:30px;
+    border:1px solid rgba(255,255,255,.12);
+    background:var(--panel);
+    color:#c7c7c7;
+    font-size:14px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.chip:hover{
+    border-color:var(--orange);
+    color:var(--orange);
+}
+
+.chip.active{
+    background:var(--orange);
+    color:white;
+    border-color:var(--orange);
+}
+
+.chip.active-blue{
+    background:#2563eb;
+    color:white;
+    border-color:#2563eb;
+}
+
+/* ================= STATUS BADGES ================= */
+
+.tag-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.tag-badge.green{ background:rgba(74,222,128,.15); color:#4ade80; }
+.tag-badge.blue{ background:rgba(59,130,246,.15); color:#60a5fa; }
+.tag-badge.orange{ background:rgba(255,140,0,.15); color:var(--orange); }
+.tag-badge.red{ background:rgba(248,113,113,.15); color:#f87171; }
+
+/* =========================
+      FOOTER
+=========================*/
+
+.footer{
+    background:#0d1014;
+    padding:80px 70px 30px;
+    border-top:1px solid rgba(255,255,255,.08);
+    margin-top:100px;
+}
+
+.footer-container{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1.2fr;
+    gap:70px;
+}
+
+.footer-logo{
+    font-size:40px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.footer-logo span{
+    color:var(--orange);
+}
+
+.footer-col p{
+    color:#8e95a4;
+    line-height:1.9;
+    font-size:16px;
+}
+
+.footer-col h3{
+    color:#70798d;
+    font-size:14px;
+    letter-spacing:1px;
+    margin-bottom:25px;
+}
+
+.footer-col a{
+    display:block;
+    color:#b6bcc9;
+    text-decoration:none;
+    margin-bottom:18px;
+    transition:.3s;
+}
+
+.footer-col a:hover{
+    color:var(--orange);
+}
+
+.social-icons{
+    display:flex;
+    gap:12px;
+    margin-top:30px;
+}
+
+.social-icons a{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:#171b21;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    border:1px solid rgba(255,255,255,.08);
+    transition:.3s;
+}
+
+.social-icons a:hover{
+    border-color:rgba(255,255,255,.2);
+    transform:translateY(-4px);
+}
+
+.app p{ margin-bottom:22px; }
+
+.store-btn{
+    width:100%;
+    height:52px;
+    background:#181d22;
+    color:white;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:14px;
+    margin-bottom:14px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.store-btn i{
+    margin-right:10px;
+    color:var(--orange);
+}
+
+.store-btn:hover{
+    border-color:var(--orange);
+}
+
+.footer hr{
+    margin:60px 0 25px;
+    border:none;
+    height:1px;
+    background:rgba(255,255,255,.08);
+}
+
+.footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.footer-bottom p{
+    color:var(--text-dimmer);
+    font-size:14px;
+}
+
+.footer-links{
+    display:flex;
+    gap:35px;
+}
+
+.footer-links a{
+    text-decoration:none;
+    color:#8d96a7;
+    font-size:14px;
+    transition:.3s;
+}
+
+.footer-links a:hover{
+    color:var(--orange);
+}
+
+/*==============================
+ SCROLLBAR
+===============================*/
+
+::-webkit-scrollbar{ width:10px; }
+::-webkit-scrollbar-track{ background:#111; }
+::-webkit-scrollbar-thumb{ background:var(--orange); border-radius:10px; }
+
+/*=========================
+      Responsive
+=========================*/
+
+@media(max-width:992px){
+    .footer-container{ grid-template-columns:1fr 1fr; }
+    .footer-bottom{ flex-direction:column; gap:20px; text-align:center; }
+    .stat-strip{ grid-template-columns:repeat(2,1fr) !important; }
+}
+
+@media(max-width:768px){
+    header{ flex-direction:column; gap:15px; padding:18px; grid-template-columns:1fr; justify-items:center; }
+    nav{ flex-wrap:wrap; justify-content:center; gap:8px; }
+    .footer{ padding:60px 25px; }
+    .footer-container{ grid-template-columns:1fr; gap:40px; }
+    .footer-links{ flex-wrap:wrap; justify-content:center; }
+    .page-hero{ padding:130px 6% 40px; }
+    .page-hero h1{ font-size:32px; }
+    .stat-strip{ grid-template-columns:1fr 1fr !important; padding:0 6% 30px; }
+}
+
+@media(max-width:500px){
+    .logo{ font-size:22px; }
+    nav a{ font-size:13px; padding:8px 12px; }
+    .stat-strip{ grid-template-columns:1fr !important; }
+}

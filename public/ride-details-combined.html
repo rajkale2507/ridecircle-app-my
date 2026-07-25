@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ride Details — RideCircle</title>
+
+    <link rel="stylesheet" href="site.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+.rd-hero{
+    height:46vh;
+    min-height:340px;
+    position:relative;
+    display:flex;
+    align-items:flex-end;
+    background:
+        linear-gradient(180deg, rgba(11,11,11,.15), rgba(11,11,11,.96));
+}
+
+.rd-hero .rd-hero-inner{
+    width:100%;
+    padding:0 8% 34px;
+}
+
+.rd-hero .back-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--text-dim);
+    text-decoration:none;
+    font-size:13px;
+    margin-bottom:16px;
+}
+
+.rd-hero .back-link:hover{ color:var(--orange); }
+
+.rd-hero .club{
+    color:var(--orange);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-bottom:10px;
+}
+
+.rd-hero h1{
+    font-size:38px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.rd-hero .route{
+    color:#c7c7c7;
+    font-size:15px;
+}
+
+.rd-body{
+    width:100%;
+    padding:50px 8% 100px;
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+    align-items:start;
+}
+
+.rd-main > section{ margin-bottom:44px; }
+
+.rd-main h2{
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:16px;
+}
+
+.rd-about p{
+    color:var(--text-dim);
+    font-size:15px;
+    line-height:1.8;
+}
+
+.rd-highlights{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:16px;
+}
+
+.rd-highlights li{
+    list-style:none;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px 16px;
+    font-size:13px;
+    color:#dcdcdc;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.rd-highlights li i{ color:var(--orange); }
+
+/* ---- GALLERY ---- */
+
+.rd-gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.rd-gallery-grid .g-item{
+    height:130px;
+    border-radius:14px;
+    transition:.3s;
+}
+
+.rd-gallery-grid .g-item:hover{ transform:translateY(-4px); }
+
+/* ---- VIDEOS ---- */
+
+.rd-video-list{ display:flex; flex-direction:column; gap:12px; }
+
+.rd-video-row{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:14px 18px;
+    transition:.25s;
+    cursor:pointer;
+}
+
+.rd-video-row:hover{ border-color:var(--orange); }
+
+.rd-video-row .play{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:rgba(255,140,0,.15);
+    color:var(--orange);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.rd-video-row .v-title{ font-size:14px; font-weight:600; color:#fff; }
+.rd-video-row .v-duration{ font-size:12px; color:var(--text-dim); margin-top:2px; }
+
+/* ---- MEMBERS ---- */
+
+.rd-member-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.rd-member{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:12px 14px;
+}
+
+.rd-member .initials{
+    width:36px; height:36px;
+    border-radius:50%;
+    background:#2a2a2a;
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:700; flex-shrink:0;
+}
+
+.rd-member .name{ font-size:13px; font-weight:600; color:#fff; }
+.rd-member .role{ font-size:11px; color:var(--text-dim); }
+
+/* ---- REVIEWS ---- */
+
+.rd-review{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px 20px;
+    margin-bottom:12px;
+}
+
+.rd-review .r-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+}
+
+.rd-review .r-name{ font-size:14px; font-weight:600; }
+.rd-review .r-stars{ color:#facc15; font-size:13px; }
+.rd-review p{ color:#c7c7c7; font-size:14px; line-height:1.7; }
+
+.rd-review-form{
+    display:flex;
+    gap:10px;
+    margin-top:16px;
+}
+
+.rd-review-form select{
+    background:#1f1f1f;
+    color:white;
+    border:1px solid #2d2d2d;
+    border-radius:10px;
+    padding:0 12px;
+    font-family:'Poppins',sans-serif;
+}
+
+.rd-review-form input{
+    flex:1;
+    background:#1f1f1f;
+    border:1px solid #2d2d2d;
+    color:white;
+    padding:12px 14px;
+    border-radius:10px;
+    outline:none;
+    font-size:14px;
+}
+
+.rd-review-form input:focus{ border-color:var(--orange); }
+
+/* ---- SIDEBAR ---- */
+
+.rd-side{
+    position:sticky;
+    top:100px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.rd-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:22px;
+}
+
+.rd-stat-row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid var(--border);
+    font-size:13px;
+}
+
+.rd-stat-row:last-child{ border-bottom:none; }
+.rd-stat-row span:first-child{ color:var(--text-dim); }
+.rd-stat-row span:last-child{ font-weight:600; }
+
+.rd-join-btn{
+    width:100%;
+    margin-top:16px;
+    padding:14px;
+    background:var(--orange);
+    color:white;
+    border:none;
+    border-radius:12px;
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.rd-join-btn:hover{ background:#ff9d1f; }
+
+.rd-join-btn.joined{
+    background:#2a2a2a;
+    color:#4ade80;
+    cursor:default;
+}
+
+@media(max-width:900px){
+    .rd-body{ grid-template-columns:1fr; }
+    .rd-gallery-grid{ grid-template-columns:1fr 1fr; }
+    .rd-highlights{ grid-template-columns:1fr; }
+    .rd-member-grid{ grid-template-columns:1fr; }
+    .rd-side{ position:static; }
+}
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo"><i class="fa-solid fa-circle"></i>RideCircle</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="live-tracking-combined.html">Live Tracking</a>
+        <a href="bike-rentals-combined.html">Bike Rentals</a>
+        <a href="community-combined.html" class="active">Community</a>
+        <a href="about-combined.html">About</a>
+        <a href="contact-combined.html">Contact</a>
+    </nav>
+    <div class="buttons">
+        <a href="login-combined.html" class="login">Login</a>
+        <a href="login-combined.html" class="signup">Sign Up</a>
+    </div>
+</header>
+
+<section class="rd-hero" id="rd-hero">
+    <div class="rd-hero-inner">
+        <a href="community-combined.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Community</a>
+        <div class="club" id="rd-club"></div>
+        <h1 id="rd-title"></h1>
+        <div class="route" id="rd-route"></div>
+    </div>
+</section>
+
+<div class="rd-body">
+
+    <div class="rd-main">
+
+        <section class="rd-about">
+            <h2>About this ride</h2>
+            <p id="rd-about-text"></p>
+            <ul class="rd-highlights" id="rd-highlights"></ul>
+        </section>
+
+        <section class="rd-gallery" id="rd-gallery-section">
+            <h2>Destination photos</h2>
+            <div class="rd-gallery-grid" id="rd-gallery-grid"></div>
+        </section>
+
+        <section class="rd-videos" id="rd-videos-section">
+            <h2>Ride videos</h2>
+            <div class="rd-video-list" id="rd-video-list"></div>
+        </section>
+
+        <section class="rd-members" id="rd-members-section">
+            <h2>Who's riding <span id="rd-member-count" style="color:var(--text-dim); font-weight:400;"></span></h2>
+            <div class="rd-member-grid" id="rd-member-grid"></div>
+        </section>
+
+        <section class="rd-reviews">
+            <h2>Rider reviews</h2>
+            <div id="rd-review-list"></div>
+
+            <form class="rd-review-form" id="rd-review-form">
+                <select id="rd-review-stars">
+                    <option value="5">★★★★★</option>
+                    <option value="4">★★★★☆</option>
+                    <option value="3">★★★☆☆</option>
+                    <option value="2">★★☆☆☆</option>
+                    <option value="1">★☆☆☆☆</option>
+                </select>
+                <input type="text" id="rd-review-text" placeholder="Share how the ride went…" required>
+                <button type="submit" class="btn btn-orange">Post</button>
+            </form>
+        </section>
+
+    </div>
+
+    <div class="rd-side">
+        <div class="rd-card">
+            <div class="rd-stat-row"><span>Difficulty</span><span id="rd-difficulty"></span></div>
+            <div class="rd-stat-row"><span>Distance</span><span id="rd-distance"></span></div>
+            <div class="rd-stat-row"><span>Duration</span><span id="rd-duration"></span></div>
+            <div class="rd-stat-row"><span>Date</span><span id="rd-date"></span></div>
+            <div class="rd-stat-row"><span>Riders joined</span><span id="rd-joined"></span></div>
+            <button class="rd-join-btn" id="rd-join-btn">Join Ride</button>
+        </div>
+    </div>
+
+</div>
+
+<!--=============== FOOTER ===============-->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h2 class="footer-logo"><span>Ride</span>Circle</h2>
+            <p>The premium biking community for group rides, live tracking, and adventure exploration worldwide.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h3>PLATFORM</h3>
+            <a href="live-tracking-combined.html">Live Tracking</a>
+            <a href="bike-rentals-combined.html">Bike Rentals</a>
+            <a href="community-combined.html">Community Rides</a>
+            <a href="rentor-combined.html">List Your Bike</a>
+            <a href="#">Route Planner</a>
+            <a href="#">Ride History</a>
+        </div>
+        <div class="footer-col">
+            <h3>COMPANY</h3>
+            <a href="about-combined.html">About Us</a>
+            <a href="contact-combined.html">Contact</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+            <a href="#">Blog</a>
+        </div>
+        <div class="footer-col app">
+            <h3>GET THE APP</h3>
+            <p>Track rides on the go. Available on iOS and Android.</p>
+            <button class="store-btn"><i class="fa-brands fa-apple"></i>App Store</button>
+            <button class="store-btn"><i class="fa-brands fa-google-play"></i>Google Play</button>
+        </div>
+    </div>
+    <hr>
+    <div class="footer-bottom">
+        <p>© 2026 RideCircle Technologies Pvt. Ltd. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+        </div>
+    </div>
+</footer>
+
+<script src="api.js"></script>
+<script src="auth.js"></script>
+<script src="script.js"></script>
+<script>
+(async function(){
+    const params = new URLSearchParams(window.location.search);
+    const rideId = params.get("ride") || "spiti-valley";
+
+    await RC_AUTH.ready;
+    const res = await RC_API.ride(rideId);
+
+    if(!res.ok){
+        document.querySelector(".rd-main").innerHTML = "<h2>Ride not found</h2><p>This ride may have been removed. <a href='community-combined.html' style='color:var(--orange);'>Browse all rides →</a></p>";
+        document.getElementById("rd-members-section").style.display = "none";
+        document.getElementById("rd-gallery-section").style.display = "none";
+        document.getElementById("rd-videos-section").style.display = "none";
+        return;
+    }
+
+    const ride = res.ride;
+    let reviews = res.reviews || [];
+
+    document.title = ride.title + " — RideCircle";
+    document.getElementById("rd-hero").style.background =
+        "linear-gradient(180deg, rgba(11,11,11,.25), rgba(11,11,11,.96)), " + ride.cover;
+    document.getElementById("rd-club").textContent = (ride.club || "").toUpperCase();
+    document.getElementById("rd-title").textContent = ride.title;
+    document.getElementById("rd-route").textContent = ride.route;
+    document.getElementById("rd-about-text").textContent = ride.about;
+    document.getElementById("rd-difficulty").textContent = ride.difficulty;
+    document.getElementById("rd-distance").textContent = ride.distanceKm + " km";
+    document.getElementById("rd-duration").textContent = ride.duration;
+    document.getElementById("rd-date").textContent = ride.date;
+    document.getElementById("rd-joined").textContent = ride.joined + " / " + ride.capacity;
+
+    document.getElementById("rd-highlights").innerHTML = (ride.highlights || [])
+        .map(h => `<li><i class="fa-solid fa-check"></i> ${h}</li>`).join("");
+
+    // This backend doesn't track a photo gallery, video list, or member
+    // roster per ride, so those sections are hidden rather than faked.
+    document.getElementById("rd-gallery-section").style.display = "none";
+    document.getElementById("rd-videos-section").style.display = "none";
+    document.getElementById("rd-members-section").style.display = "none";
+
+    function renderReviews(){
+        document.getElementById("rd-review-list").innerHTML = reviews.length ? reviews.map(r => `
+            <div class="rd-review">
+                <div class="r-top">
+                    <span class="r-name">${r.name}</span>
+                    <span class="r-stars">${"★".repeat(r.stars)}${"☆".repeat(5 - r.stars)}</span>
+                </div>
+                <p>${r.text}</p>
+            </div>`).join("") : `<p style="color:var(--text-dim);">No reviews yet — be the first to ride and review.</p>`;
+    }
+    renderReviews();
+
+    const joinBtn = document.getElementById("rd-join-btn");
+    function refreshJoinBtn(){
+        const user = RC_AUTH.currentUser();
+        const joined = user && (user.joinedRides || []).includes(rideId);
+        if(joined){
+            joinBtn.textContent = "Joined ✓";
+            joinBtn.classList.add("joined");
+        } else {
+            joinBtn.textContent = "Join Ride";
+            joinBtn.classList.remove("joined");
+        }
+    }
+    refreshJoinBtn();
+
+    joinBtn.addEventListener("click", async () => {
+        if(joinBtn.classList.contains("joined")) return;
+        const user = RC_AUTH.currentUser();
+        if(!user){
+            window.location.href = "login-combined.html?next=" + encodeURIComponent("ride-details-combined.html?ride=" + rideId);
+            return;
+        }
+        joinBtn.disabled = true;
+        joinBtn.textContent = "Sending request…";
+        const jres = await RC_API.joinRide(rideId);
+        joinBtn.disabled = false;
+        if(jres.ok){
+            joinBtn.textContent = jres.alreadyJoined ? "Joined ✓" : "Request sent ✓";
+            joinBtn.classList.add("joined");
+        } else {
+            joinBtn.textContent = "Join Ride";
+            alert(jres.error || "Couldn't submit request.");
+        }
+    });
+
+    document.getElementById("rd-review-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const user = RC_AUTH.currentUser();
+        if(!user){
+            window.location.href = "login-combined.html?next=" + encodeURIComponent("ride-details-combined.html?ride=" + rideId);
+            return;
+        }
+        const text = document.getElementById("rd-review-text").value.trim();
+        const stars = parseInt(document.getElementById("rd-review-stars").value, 10);
+        if(!text) return;
+        const rres = await RC_API.addReview(rideId, stars, text);
+        if(rres.ok){
+            reviews.unshift(rres.review);
+            renderReviews();
+            document.getElementById("rd-review-text").value = "";
+        } else {
+            alert(rres.error || "Couldn't submit review.");
+        }
+    });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community — RideCircle</title>
+
+    <link rel="stylesheet" href="site.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+.section-heading{
+    padding:0 8% 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.section-heading h2{
+    font-size:26px;
+    font-weight:700;
+}
+
+.section-heading a{
+    color:var(--orange);
+    font-size:14px;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.ride-grid{
+    width:100%;
+    padding:0 8% 70px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+}
+
+.ride-event-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:18px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.ride-event-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--orange);
+}
+
+.ride-event-photo{
+    height:170px;
+    position:relative;
+}
+
+.ride-event-photo .diff-badge{
+    position:absolute;
+    top:12px;
+    right:12px;
+    font-size:11px;
+    padding:5px 12px;
+    border-radius:20px;
+    font-weight:600;
+}
+
+.diff-badge.hard{ background:rgba(248,113,113,.85); color:#fff; }
+.diff-badge.easy{ background:rgba(74,222,128,.85); color:#062b14; }
+.diff-badge.medium{ background:rgba(250,204,21,.85); color:#3d2e00; }
+
+.ride-event-info{ padding:20px; }
+
+.ride-event-info .club{
+    font-size:12px;
+    color:var(--text-dim);
+    margin-bottom:4px;
+}
+
+.ride-event-info h3{
+    font-size:19px;
+    margin-bottom:8px;
+}
+
+.ride-event-info .route{
+    font-size:13px;
+    color:#c7c7c7;
+    margin-bottom:14px;
+}
+
+.ride-event-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:13px;
+    color:var(--text-dim);
+    margin-bottom:14px;
+}
+
+.progress-track{
+    width:100%;
+    height:6px;
+    border-radius:6px;
+    background:#2a2a2a;
+    margin-bottom:8px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    background:var(--orange);
+    border-radius:6px;
+}
+
+.ride-event-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.spots-left{
+    font-size:12px;
+    color:var(--text-dim);
+}
+
+.join-btn{
+    padding:10px 22px;
+    background:var(--orange);
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.join-btn:hover{ background:#ff9d1f; }
+
+.gallery-grid{
+    width:100%;
+    padding:0 8% 100px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.gallery-item{
+    height:160px;
+    border-radius:14px;
+}
+
+@media(max-width:900px){
+    .ride-grid{ grid-template-columns:1fr; }
+    .gallery-grid{ grid-template-columns:repeat(2,1fr); }
+}
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo"><i class="fa-solid fa-circle"></i>RideCircle</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="live-tracking-combined.html">Live Tracking</a>
+        <a href="bike-rentals-combined.html">Bike Rentals</a>
+        <a href="community-combined.html" class="active">Community</a>
+        <a href="about-combined.html">About</a>
+        <a href="contact-combined.html">Contact</a>
+    </nav>
+    <div class="buttons">
+        <a href="login-combined.html" class="login">Login</a>
+        <a href="login-combined.html" class="signup">Sign Up</a>
+    </div>
+</header>
+
+<section class="page-hero">
+    <h1>Rider <span>Community</span></h1>
+    <p>Join thousands of riders on epic group adventures. Every road is better together.</p>
+</section>
+
+<section class="stat-strip" style="grid-template-columns:repeat(4,1fr);">
+    <div class="stat-card orange">
+        <h2>89,240</h2>
+        <p>Members</p>
+    </div>
+    <div class="stat-card blue">
+        <h2>1,840</h2>
+        <p>Active Groups</p>
+    </div>
+    <div class="stat-card green">
+        <h2>24,600</h2>
+        <p>Rides Completed</p>
+    </div>
+    <div class="stat-card purple">
+        <h2>4.9M km</h2>
+        <p>Total Distance</p>
+    </div>
+</section>
+
+<div class="section-heading">
+    <h2>Upcoming Rides</h2>
+    <a href="#">View All Rides →</a>
+</div>
+
+<div class="ride-grid" id="ride-grid">
+    <p style="padding:40px; color:var(--text-dim);">Loading rides…</p>
+</div>
+
+<div class="section-heading">
+    <h2>Ride Gallery</h2>
+    <a href="#">View All Photos →</a>
+</div>
+
+<div class="gallery-grid">
+    <div class="gallery-item" style="background:linear-gradient(160deg,#5a4632,#2b2116);"></div>
+    <div class="gallery-item" style="background:linear-gradient(160deg,#3a3a3a,#111);"></div>
+    <div class="gallery-item" style="background:linear-gradient(160deg,#4a5a35,#1c2416);"></div>
+    <div class="gallery-item" style="background:linear-gradient(160deg,#333,#0f0f0f);"></div>
+</div>
+
+<!--=============== FOOTER ===============-->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h2 class="footer-logo"><span>Ride</span>Circle</h2>
+            <p>The premium biking community for group rides, live tracking, and adventure exploration worldwide.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h3>PLATFORM</h3>
+            <a href="live-tracking-combined.html">Live Tracking</a>
+            <a href="bike-rentals-combined.html">Bike Rentals</a>
+            <a href="community-combined.html">Community Rides</a>
+            <a href="rentor-combined.html">List Your Bike</a>
+            <a href="#">Route Planner</a>
+            <a href="#">Ride History</a>
+        </div>
+        <div class="footer-col">
+            <h3>COMPANY</h3>
+            <a href="about-combined.html">About Us</a>
+            <a href="contact-combined.html">Contact</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+            <a href="#">Blog</a>
+        </div>
+        <div class="footer-col app">
+            <h3>GET THE APP</h3>
+            <p>Track rides on the go. Available on iOS and Android.</p>
+            <button class="store-btn"><i class="fa-brands fa-apple"></i>App Store</button>
+            <button class="store-btn"><i class="fa-brands fa-google-play"></i>Google Play</button>
+        </div>
+    </div>
+    <hr>
+    <div class="footer-bottom">
+        <p>© 2026 RideCircle Technologies Pvt. Ltd. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+        </div>
+    </div>
+</footer>
+
+<script src="api.js"></script>
+<script src="auth.js"></script>
+<script>
+    const DIFF_CLASS = { Hard: "hard", Easy: "easy", Medium: "medium" };
+
+    async function rcJoin(rideId, btn){
+        await RC_AUTH.ready;
+        const user = RC_AUTH.currentUser();
+        if(!user){
+            window.location.href = "login-combined.html?next=community-combined.html";
+            return;
+        }
+        btn.disabled = true;
+        btn.textContent = "Sending request…";
+        const res = await RC_API.joinRide(rideId);
+        if(res.ok){
+            btn.textContent = (res.alreadyJoined) ? "Joined ✓" : "Request sent ✓";
+            btn.style.background = "#2a2a2a";
+            btn.style.color = "#4ade80";
+            btn.style.cursor = "default";
+        } else {
+            btn.disabled = false;
+            btn.textContent = "Join Ride";
+            alert(res.error || "Couldn't submit request.");
+        }
+    }
+
+    function renderRides(rides){
+        const grid = document.getElementById("ride-grid");
+        if(!rides.length){
+            grid.innerHTML = `<p style="padding:40px; color:var(--text-dim);">No rides posted yet.</p>`;
+            return;
+        }
+        grid.innerHTML = rides.map(r => {
+            const pct = r.capacity ? Math.min(100, Math.round((r.joined / r.capacity) * 100)) : 0;
+            const spotsLeft = Math.max(0, (r.capacity || 0) - (r.joined || 0));
+            return `
+            <div class="ride-event-card" data-id="${r.id}" style="cursor:pointer;">
+                <div class="ride-event-photo" style="background:${r.cover};">
+                    <span class="diff-badge ${DIFF_CLASS[r.difficulty] || "medium"}">${r.difficulty}</span>
+                </div>
+                <div class="ride-event-info">
+                    <div class="club">${r.club}</div>
+                    <h3>${r.title}</h3>
+                    <div class="route">${r.route}</div>
+                    <div class="ride-event-meta">
+                        <span><i class="fa-regular fa-calendar"></i> ${r.date}</span>
+                        <span><i class="fa-solid fa-users"></i> ${r.joined}/${r.capacity}</span>
+                    </div>
+                    <div class="progress-track"><div class="progress-fill" style="width:${pct}%;"></div></div>
+                    <div class="ride-event-footer">
+                        <span class="spots-left">${spotsLeft} spots remaining</span>
+                        <button class="join-btn">Join Ride</button>
+                    </div>
+                </div>
+            </div>`;
+        }).join("");
+
+        grid.querySelectorAll(".ride-event-card").forEach(card => {
+            const id = card.dataset.id;
+            card.addEventListener("click", () => location.href = `ride-details-combined.html?ride=${id}`);
+            const btn = card.querySelector(".join-btn");
+            btn.addEventListener("click", (e) => { e.stopPropagation(); rcJoin(id, btn); });
+        });
+    }
+
+    (async function init(){
+        const res = await RC_API.rides();
+        renderRides(res.ok ? res.rides : []);
+    })();
+</script>
+<script src="script.js"></script>
+</body>
+</html>

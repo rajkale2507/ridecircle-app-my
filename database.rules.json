@@ -1,0 +1,62 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "rides": {
+      "$rideCode": {
+        "riders": {
+          ".read": "auth != null",
+          ".write": "auth != null",
+
+          "$riderId": {
+            ".validate": "newData.hasChildren(['name','lat','lng','updatedAt'])",
+            "name": {
+              ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length < 50"
+            },
+            "lat": {
+              ".validate": "newData.isNumber() && newData.val() >= -90 && newData.val() <= 90"
+            },
+            "lng": {
+              ".validate": "newData.isNumber() && newData.val() >= -180 && newData.val() <= 180"
+            },
+            "speed": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 400"
+            },
+            "updatedAt": {
+              ".validate": "newData.isNumber()"
+            },
+            "$other": { ".validate": false }
+          }
+        },
+
+        "route": {
+          ".read": "auth != null",
+          ".write": "auth != null",
+          ".validate": "newData.hasChildren(['start','destination','destLat','destLng'])",
+          "start": { ".validate": "newData.isString()" },
+          "destination": { ".validate": "newData.isString()" },
+          "destLat": { ".validate": "newData.isNumber() && newData.val() >= -90 && newData.val() <= 90" },
+          "destLng": { ".validate": "newData.isNumber() && newData.val() >= -180 && newData.val() <= 180" },
+          "distance": { ".validate": "newData.isNumber()" },
+          "duration": { ".validate": "newData.isNumber()" },
+          "updatedAt": { ".validate": "newData.isNumber()" },
+          "$other": { ".validate": false }
+        }
+      }
+    },
+
+    "sos": {
+      ".read": "auth != null",
+      "$sosId": {
+        "//": "create-only — an SOS alert, once written, can't be edited or deleted by a client",
+        ".write": "auth != null && !data.exists()",
+        ".validate": "newData.hasChildren(['rider','rideCode','time'])",
+        "rider": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length < 60" },
+        "rideCode": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length < 60" },
+        "time": { ".validate": "newData.isNumber()" },
+        "$other": { ".validate": false }
+      }
+    }
+  }
+}

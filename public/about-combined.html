@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — RideCircle</title>
+
+    <link rel="stylesheet" href="site.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+/* ================= ABOUT HERO ================= */
+
+.about-hero{
+    height:70vh;
+    min-height:480px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:
+        linear-gradient(180deg, rgba(11,11,11,.4), rgba(11,11,11,.9)),
+        linear-gradient(120deg, #2b2114 0%, #1a1f14 50%, #0d1420 100%);
+}
+
+.about-hero .inner{
+    max-width:720px;
+    padding:0 20px;
+}
+
+.about-hero .eyebrow{
+    display:inline-block;
+    color:var(--orange);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:2px;
+    margin-bottom:18px;
+}
+
+.about-hero h1{
+    font-size:52px;
+    font-weight:800;
+    line-height:1.15;
+    margin-bottom:20px;
+}
+
+.about-hero h1 span{ color:var(--orange); }
+
+.about-hero p{
+    color:#c7c7c7;
+    font-size:18px;
+    line-height:1.7;
+}
+
+/* ================= MISSION / VISION ================= */
+
+.mv-grid{
+    width:84%;
+    margin:70px auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+}
+
+.mv-card{
+    background:var(--panel);
+    border-left:4px solid var(--orange);
+    border-radius:16px;
+    padding:36px;
+}
+
+.mv-card.vision{
+    border-left-color:#3b82f6;
+}
+
+.mv-card .eyebrow{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    color:var(--orange);
+    margin-bottom:14px;
+}
+
+.mv-card.vision .eyebrow{ color:#3b82f6; }
+
+.mv-card h3{
+    font-size:26px;
+    font-weight:700;
+    margin-bottom:16px;
+    line-height:1.3;
+}
+
+.mv-card p{
+    color:var(--text-dim);
+    font-size:15px;
+    line-height:1.8;
+}
+
+/* ================= WHY RIDECIRCLE ================= */
+
+.why-title{
+    text-align:center;
+    padding:20px 20px 50px;
+}
+
+.why-title h2{
+    font-size:36px;
+    font-weight:700;
+}
+
+.why-title h2 span{ color:var(--orange); }
+
+.why-title p{
+    color:var(--text-dim);
+    margin-top:10px;
+}
+
+.why-grid{
+    width:84%;
+    margin:0 auto 100px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.why-card{
+    background:var(--panel-alt);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:26px;
+    transition:.3s;
+}
+
+.why-card:hover{
+    border-color:var(--orange);
+    transform:translateY(-6px);
+}
+
+.why-card .icon{
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    margin-bottom:16px;
+}
+
+.why-card h4{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.why-card p{
+    color:var(--text-dim);
+    font-size:14px;
+    line-height:1.7;
+}
+
+.why-card.cta{
+    background:linear-gradient(135deg, rgba(255,140,0,.12), rgba(255,140,0,.03));
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+.why-card.cta .rocket{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.why-card.cta p{ margin-bottom:16px; }
+
+@media(max-width:900px){
+    .mv-grid, .why-grid{ grid-template-columns:1fr; width:90%; }
+    .about-hero h1{ font-size:36px; }
+}
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo"><i class="fa-solid fa-circle"></i>RideCircle</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="live-tracking-combined.html">Live Tracking</a>
+        <a href="bike-rentals-combined.html">Bike Rentals</a>
+        <a href="community-combined.html">Community</a>
+        <a href="about-combined.html" class="active">About</a>
+        <a href="contact-combined.html">Contact</a>
+    </nav>
+    <div class="buttons">
+        <a href="login-combined.html" class="login">Login</a>
+        <a href="login-combined.html" class="signup">Sign Up</a>
+    </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="about-hero">
+    <div class="inner">
+        <span class="eyebrow">OUR STORY</span>
+        <h1>Riding, <span>Reimagined.</span></h1>
+        <p>
+            RideCircle was built by riders, for riders. We believe every journey is
+            better when shared — safer, smarter, and more connected than ever before.
+        </p>
+    </div>
+</section>
+
+<!-- ================= MISSION / VISION ================= -->
+<section class="mv-grid">
+
+    <div class="mv-card">
+        <span class="eyebrow">OUR MISSION</span>
+        <h3>Safer, Smarter,<br>Connected Riding</h3>
+        <p>
+            We're building the infrastructure that makes group riding truly safe.
+            Through real-time tracking, intelligent routing, and community tools,
+            we eliminate the risks and friction that hold riders back.
+        </p>
+        <p style="margin-top:14px;">
+            Every feature we build starts with one question: does this make the
+            ride safer or more connected?
+        </p>
+    </div>
+
+    <div class="mv-card vision">
+        <span class="eyebrow">OUR VISION</span>
+        <h3>The World's Most<br>Trusted Riding Network</h3>
+        <p>
+            We envision a world where every road is an opportunity for connection.
+            A global network of trusted riders, sharing routes, experiences, and
+            the pure joy of two wheels.
+        </p>
+        <p style="margin-top:14px;">
+            By 2027, we aim to have 1 million active riders across 50 countries —
+            all riding safer because of RideCircle.
+        </p>
+    </div>
+
+</section>
+
+<!-- ================= WHY RIDECIRCLE ================= -->
+<section class="why-title">
+    <h2>Why <span>RideCircle?</span></h2>
+    <p>Five pillars that make every ride extraordinary.</p>
+</section>
+
+<section class="why-grid">
+
+    <div class="why-card">
+        <div class="icon" style="background:#173b24;color:#4ade80;">🛡️</div>
+        <h4>Safety First</h4>
+        <p>Real-time SOS alerts, emergency contacts, and automatic crash detection keep every rider protected on the road.</p>
+    </div>
+
+    <div class="why-card">
+        <div class="icon" style="background:#1d2946;color:#60a5fa;">🗺️</div>
+        <h4>Smart Navigation</h4>
+        <p>AI-powered route planning with offline maps, road condition alerts, and fuel stop recommendations along your route.</p>
+    </div>
+
+    <div class="why-card">
+        <div class="icon" style="background:#3b2418;color:#fb923c;">📡</div>
+        <h4>Live Coordination</h4>
+        <p>Real-time group tracking, in-app voice messaging, and ride management tools for seamless group coordination.</p>
+    </div>
+
+    <div class="why-card">
+        <div class="icon" style="background:#20304d;color:#4aa8ff;">🌐</div>
+        <h4>Global Community</h4>
+        <p>Connect with 89,000+ riders worldwide. Share routes, experiences, and discover new destinations together.</p>
+    </div>
+
+    <div class="why-card">
+        <div class="icon" style="background:#3d2c59;color:#b86cff;">🔑</div>
+        <h4>Premium Rentals</h4>
+        <p>Access a curated fleet of adventure-grade motorcycles anywhere. No ownership hassle, just pure riding freedom.</p>
+    </div>
+
+    <div class="why-card cta">
+        <div class="rocket">🚀</div>
+        <h4>Ready to ride?</h4>
+        <p>Join 89,000+ riders today. It's free.</p>
+        <a href="login-combined.html" class="btn btn-orange">Get Started Free</a>
+    </div>
+
+</section>
+
+<!--=============== FOOTER ===============-->
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <h2 class="footer-logo"><span>Ride</span>Circle</h2>
+            <p>The premium biking community for group rides, live tracking, and adventure exploration worldwide.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3>PLATFORM</h3>
+            <a href="live-tracking-combined.html">Live Tracking</a>
+            <a href="bike-rentals-combined.html">Bike Rentals</a>
+            <a href="community-combined.html">Community Rides</a>
+            <a href="rentor-combined.html">List Your Bike</a>
+            <a href="#">Route Planner</a>
+            <a href="#">Ride History</a>
+        </div>
+
+        <div class="footer-col">
+            <h3>COMPANY</h3>
+            <a href="about-combined.html">About Us</a>
+            <a href="contact-combined.html">Contact</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+            <a href="#">Blog</a>
+        </div>
+
+        <div class="footer-col app">
+            <h3>GET THE APP</h3>
+            <p>Track rides on the go. Available on iOS and Android.</p>
+            <button class="store-btn"><i class="fa-brands fa-apple"></i>App Store</button>
+            <button class="store-btn"><i class="fa-brands fa-google-play"></i>Google Play</button>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="footer-bottom">
+        <p>© 2026 RideCircle Technologies Pvt. Ltd. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+        </div>
+    </div>
+</footer>
+
+<script src="api.js"></script>
+<script src="auth.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

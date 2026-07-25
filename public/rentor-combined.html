@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a Rentor — RideCircle</title>
+
+    <link rel="stylesheet" href="site.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+.rentor-gate{
+    width:84%;
+    margin:60px auto 120px;
+    max-width:480px;
+    text-align:center;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:50px 40px;
+}
+
+.rentor-gate .icon-badge{
+    width:60px; height:60px;
+    border-radius:16px;
+    background:rgba(255,140,0,.12);
+    color:var(--orange);
+    display:flex; align-items:center; justify-content:center;
+    font-size:24px;
+    margin:0 auto 20px;
+}
+
+.rentor-gate h2{ font-size:22px; margin-bottom:10px; }
+.rentor-gate p{ color:var(--text-dim); font-size:14px; margin-bottom:24px; line-height:1.7; }
+
+.rentor-layout{
+    width:100%;
+    padding:0 8% 100px;
+    display:grid;
+    grid-template-columns:380px 1fr;
+    gap:26px;
+    align-items:start;
+}
+
+.rentor-form-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:26px;
+    position:sticky;
+    top:100px;
+}
+
+.rentor-form-card h3{ font-size:18px; margin-bottom:20px; }
+
+.r-input{ margin-bottom:16px; }
+
+.r-input label{
+    display:block;
+    font-size:11px;
+    letter-spacing:1px;
+    color:var(--text-dim);
+    margin-bottom:8px;
+}
+
+.r-input input,
+.r-input select{
+    width:100%;
+    background:#1f1f1f;
+    border:1px solid #2d2d2d;
+    color:white;
+    padding:11px 14px;
+    border-radius:10px;
+    outline:none;
+    font-size:14px;
+    font-family:'Poppins',sans-serif;
+}
+
+.r-input input:focus,
+.r-input select:focus{ border-color:var(--orange); }
+
+.r-row{ display:flex; gap:12px; }
+.r-row .r-input{ flex:1; }
+
+.rentor-submit{
+    width:100%;
+    padding:13px;
+    background:var(--orange);
+    color:white;
+    border:none;
+    border-radius:12px;
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+    margin-top:6px;
+}
+
+.rentor-submit:hover{ background:#ff9d1f; }
+
+.rentor-listings h2{ font-size:20px; margin-bottom:18px; }
+
+.rentor-empty{
+    color:var(--text-dim);
+    font-size:14px;
+    background:var(--panel);
+    border:1px dashed var(--border);
+    border-radius:14px;
+    padding:34px;
+    text-align:center;
+}
+
+.rentor-bike-row{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px 22px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:14px;
+    transition:.25s;
+}
+
+.rentor-bike-row:hover{ border-color:var(--orange); }
+
+.rentor-bike-row .thumb{
+    width:70px; height:60px;
+    border-radius:10px;
+    flex-shrink:0;
+}
+
+.rentor-bike-row .details{ flex:1; }
+.rentor-bike-row .details h4{ font-size:16px; margin-bottom:4px; }
+.rentor-bike-row .details .meta{ font-size:12px; color:var(--text-dim); }
+
+.rentor-bike-row .price-edit{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.rentor-bike-row .price-edit span{ color:var(--text-dim); font-size:13px; }
+
+.rentor-bike-row .price-edit input{
+    width:90px;
+    background:#1f1f1f;
+    border:1px solid #2d2d2d;
+    color:var(--orange);
+    font-weight:700;
+    padding:9px 10px;
+    border-radius:8px;
+    font-size:14px;
+    font-family:'Poppins',sans-serif;
+}
+
+.rentor-actions{
+    display:flex;
+    gap:8px;
+}
+
+.rentor-actions button{
+    padding:9px 14px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:transparent;
+    color:#c7c7c7;
+    font-size:12px;
+    cursor:pointer;
+    transition:.2s;
+    font-family:'Poppins',sans-serif;
+}
+
+.rentor-actions button.toggle.available{ color:#4ade80; border-color:rgba(74,222,128,.3); }
+.rentor-actions button.toggle.paused{ color:#facc15; border-color:rgba(250,204,21,.3); }
+.rentor-actions button.delete:hover{ color:#f87171; border-color:rgba(248,113,113,.4); }
+.rentor-actions button.save:hover{ color:var(--orange); border-color:var(--orange); }
+
+.rentor-stats-strip{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-bottom:26px;
+}
+
+@media(max-width:900px){
+    .rentor-layout{ grid-template-columns:1fr; }
+    .rentor-form-card{ position:static; }
+    .rentor-bike-row{ flex-wrap:wrap; }
+    .rentor-stats-strip{ grid-template-columns:1fr; }
+}
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo"><i class="fa-solid fa-circle"></i>RideCircle</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="live-tracking-combined.html">Live Tracking</a>
+        <a href="bike-rentals-combined.html">Bike Rentals</a>
+        <a href="community-combined.html">Community</a>
+        <a href="about-combined.html">About</a>
+        <a href="contact-combined.html">Contact</a>
+    </nav>
+    <div class="buttons">
+        <a href="login-combined.html" class="login">Login</a>
+        <a href="login-combined.html" class="signup">Sign Up</a>
+    </div>
+</header>
+
+<section class="page-hero">
+    <span class="eyebrow">FOR BIKE OWNERS</span>
+    <h1>Become a <span>Rentor</span></h1>
+    <p>List your motorcycle, set your own daily rent, and earn from riders who book it on Bike Rentals. You control price and availability at all times.</p>
+</section>
+
+<!-- Shown when NOT logged in -->
+<div class="rentor-gate" id="rentor-gate" style="display:none;">
+    <div class="icon-badge"><i class="fa-solid fa-lock"></i></div>
+    <h2>Sign in to list your bike</h2>
+    <p>You need a RideCircle account so riders can see who they're renting from, and so your listings stay tied to you.</p>
+    <a href="login-combined.html?next=rentor-combined.html" class="btn btn-orange">Sign In / Sign Up</a>
+</div>
+
+<!-- Shown when logged in -->
+<div id="rentor-app" style="display:none;">
+
+    <div class="rentor-layout">
+
+        <div class="rentor-form-card">
+            <h3>List a new bike</h3>
+            <form id="rentor-form">
+                <div class="r-input">
+                    <label>BIKE NAME</label>
+                    <input type="text" id="f-name" placeholder="Royal Enfield Himalayan" required>
+                </div>
+
+                <div class="r-row">
+                    <div class="r-input">
+                        <label>BRAND</label>
+                        <input type="text" id="f-brand" placeholder="Royal Enfield" required>
+                    </div>
+                    <div class="r-input">
+                        <label>ENGINE CC</label>
+                        <input type="text" id="f-cc" placeholder="411cc" required>
+                    </div>
+                </div>
+
+                <div class="r-input">
+                    <label>CATEGORY</label>
+                    <select id="f-category">
+                        <option>Adventure</option>
+                        <option>Touring</option>
+                        <option>Classic</option>
+                        <option>Sport</option>
+                        <option>Cruiser</option>
+                    </select>
+                </div>
+
+                <div class="r-input">
+                    <label>YOUR DAILY RENT (₹)</label>
+                    <input type="number" id="f-price" placeholder="1800" min="200" step="50" required>
+                </div>
+
+                <div class="r-input">
+                    <label>PICKUP CITY</label>
+                    <input type="text" id="f-city" placeholder="Manali, Himachal Pradesh" required>
+                </div>
+
+                <button type="submit" class="rentor-submit">List This Bike</button>
+            </form>
+        </div>
+
+        <div class="rentor-listings">
+            <div class="rentor-stats-strip">
+                <div class="stat-card orange"><h2 id="stat-total">0</h2><p>Bikes Listed</p></div>
+                <div class="stat-card green"><h2 id="stat-active">0</h2><p>Currently Available</p></div>
+                <div class="stat-card blue"><h2 id="stat-avg">₹0</h2><p>Avg. Daily Rent Set</p></div>
+            </div>
+
+            <h2>Your Listings</h2>
+            <div id="listings-container"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<!--=============== FOOTER ===============-->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h2 class="footer-logo"><span>Ride</span>Circle</h2>
+            <p>The premium biking community for group rides, live tracking, and adventure exploration worldwide.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h3>PLATFORM</h3>
+            <a href="live-tracking-combined.html">Live Tracking</a>
+            <a href="bike-rentals-combined.html">Bike Rentals</a>
+            <a href="community-combined.html">Community Rides</a>
+            <a href="rentor-combined.html">List Your Bike</a>
+            <a href="#">Route Planner</a>
+            <a href="#">Ride History</a>
+        </div>
+        <div class="footer-col">
+            <h3>COMPANY</h3>
+            <a href="about-combined.html">About Us</a>
+            <a href="contact-combined.html">Contact</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+            <a href="#">Blog</a>
+        </div>
+        <div class="footer-col app">
+            <h3>GET THE APP</h3>
+            <p>Track rides on the go. Available on iOS and Android.</p>
+            <button class="store-btn"><i class="fa-brands fa-apple"></i>App Store</button>
+            <button class="store-btn"><i class="fa-brands fa-google-play"></i>Google Play</button>
+        </div>
+    </div>
+    <hr>
+    <div class="footer-bottom">
+        <p>© 2026 RideCircle Technologies Pvt. Ltd. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+        </div>
+    </div>
+</footer>
+
+<script src="api.js"></script>
+<script src="auth.js"></script>
+<script src="script.js"></script>
+<script>
+const STATUS_BADGE = {
+    pending: '<span class="tag-badge blue" style="margin-left:8px;">Pending admin approval</span>',
+    approved: '<span class="tag-badge green" style="margin-left:8px;">Live</span>',
+    rejected: '<span class="tag-badge red" style="margin-left:8px;">Rejected by admin</span>'
+};
+
+window.addEventListener("load", async () => {
+
+    await RC_AUTH.init();
+
+    const user = RC_AUTH.currentUser();
+
+    console.log("Rentor User:", user);
+
+    const gate = document.getElementById("rentor-gate");
+    const app = document.getElementById("rentor-app");
+
+    if (!user) {
+        console.log("NO USER FOUND");
+        gate.style.display = "block";
+        app.style.display = "none";
+        return;
+    }
+
+    console.log("Rentor unlocked");
+
+    gate.style.display = "none";
+    app.style.display = "block";
+
+    renderListings();
+
+    document.getElementById("rentor-form")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const submitBtn = e.target.querySelector(".rentor-submit");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Submitting…";
+
+        const res = await RC_API.createBike({
+            name: document.getElementById("f-name").value.trim(),
+            brand: document.getElementById("f-brand").value.trim(),
+            cc: document.getElementById("f-cc").value.trim(),
+            category: document.getElementById("f-category").value,
+            price: parseInt(document.getElementById("f-price").value, 10),
+            city: document.getElementById("f-city").value.trim()
+        });
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = "List This Bike";
+
+        if (res.ok) {
+            e.target.reset();
+            renderListings();
+        } else {
+            alert(res.error || "Couldn't list this bike.");
+        }
+    });
+
+    // renderListings function stays below unchanged
+
+});
+        async function renderListings(){
+            const res = await RC_API.myBikes();
+            const mine = res.ok ? res.bikes : [];
+            const container = document.getElementById("listings-container");
+
+            document.getElementById("stat-total").textContent = mine.length;
+            document.getElementById("stat-active").textContent = mine.filter(b => b.available && b.status === "approved").length;
+            document.getElementById("stat-avg").textContent = "₹" + (mine.length
+                ? Math.round(mine.reduce((s,b) => s + b.price, 0) / mine.length)
+                : 0);
+
+            if(!mine.length){
+                container.innerHTML = `<div class="rentor-empty">You haven't listed a bike yet — add one on the left. Once an admin approves it, it'll appear live on the Bike Rentals page.</div>`;
+                return;
+            }
+
+            container.innerHTML = mine.map(b => `
+                <div class="rentor-bike-row" data-id="${b.id}">
+                    <div class="thumb" style="background:${b.thumb};"></div>
+                    <div class="details">
+                        <h4>${b.name} ${STATUS_BADGE[b.status] || ""}</h4>
+                        <div class="meta">${b.brand} · ${b.cc} · ${b.category} · ${b.city}</div>
+                    </div>
+                    <div class="price-edit">
+                        <span>₹</span><input type="number" class="price-input" value="${b.price}" min="200" step="50">
+                        <span>/day</span>
+                    </div>
+                    <div class="rentor-actions">
+                        <button class="save">Save</button>
+                        <button class="toggle ${b.available ? "available" : "paused"}">${b.available ? "Available" : "Paused"}</button>
+                        <button class="delete">Delete</button>
+                    </div>
+                </div>
+            `).join("");
+
+            container.querySelectorAll(".rentor-bike-row").forEach(row => {
+                const id = row.dataset.id;
+
+                row.querySelector(".save").addEventListener("click", async () => {
+                    const price = parseInt(row.querySelector(".price-input").value, 10);
+                    await RC_API.updateBike(id, { price });
+                    renderListings();
+                });
+
+                row.querySelector(".toggle").addEventListener("click", async () => {
+                    const nowAvailable = row.querySelector(".toggle").classList.contains("paused");
+                    await RC_API.updateBike(id, { available: nowAvailable });
+                    renderListings();
+                });
+
+                row.querySelector(".delete").addEventListener("click", async () => {
+                    if(!confirm("Delete this listing?")) return;
+                    await RC_API.deleteBike(id);
+                    renderListings();
+                });
+            });
+        }
+    
+</script>
+</body>
+</html>

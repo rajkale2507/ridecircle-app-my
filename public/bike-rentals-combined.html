@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike Rentals — RideCircle</title>
+
+    <link rel="stylesheet" href="site.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+.search-bar{
+    width:100%;
+    padding:0 8% 30px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    align-items:flex-end;
+}
+
+.search-field{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:12px 18px;
+    flex:1;
+    min-width:220px;
+}
+
+.search-field label{
+    display:block;
+    font-size:11px;
+    letter-spacing:1px;
+    color:var(--text-dim);
+    margin-bottom:6px;
+}
+
+.search-field input{
+    width:100%;
+    background:transparent;
+    border:none;
+    color:white;
+    font-size:15px;
+    outline:none;
+}
+
+.search-btn{
+    padding:16px 30px;
+    background:var(--orange);
+    color:white;
+    border:none;
+    border-radius:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    white-space:nowrap;
+}
+
+.search-btn:hover{ background:#ff9d1f; }
+
+.filters-row{
+    padding:0 8% 30px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:16px;
+}
+
+.results-count{
+    color:var(--text-dim);
+    font-size:14px;
+    align-self:center;
+}
+
+.bike-grid{
+    width:100%;
+    padding:0 8% 100px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+}
+
+.bike-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:18px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.bike-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--orange);
+}
+
+.bike-photo{
+    height:180px;
+    position:relative;
+    display:flex;
+    align-items:flex-end;
+}
+
+.bike-photo .avail-badge{
+    position:absolute;
+    top:12px;
+    left:12px;
+}
+
+.bike-photo .cat-badge{
+    position:absolute;
+    top:12px;
+    right:12px;
+    font-size:11px;
+    background:rgba(0,0,0,.5);
+    padding:5px 12px;
+    border-radius:20px;
+    color:#e6e6e6;
+}
+
+.bike-info{ padding:20px; }
+
+.bike-info .top-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:4px;
+}
+
+.bike-info h3{
+    font-size:18px;
+    color:#fff;
+}
+
+.bike-info .brand{
+    font-size:13px;
+    color:var(--text-dim);
+    margin-bottom:8px;
+}
+
+.bike-info .price{
+    text-align:right;
+    color:var(--orange);
+    font-weight:700;
+    font-size:17px;
+}
+
+.bike-info .price span{
+    display:block;
+    font-size:11px;
+    color:var(--text-dim);
+    font-weight:400;
+}
+
+.bike-info .rating{
+    font-size:13px;
+    color:#facc15;
+    margin-bottom:12px;
+}
+
+.bike-info .rating span{ color:var(--text-dim); margin-left:4px; }
+
+.spec-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:16px;
+}
+
+.spec-chip{
+    font-size:11px;
+    padding:5px 10px;
+    background:#1f1f1f;
+    border-radius:8px;
+    color:#c7c7c7;
+}
+
+.bike-card.booked{
+    opacity:.55;
+}
+
+.rent-btn{
+    width:100%;
+    padding:12px;
+    background:var(--orange);
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.rent-btn:hover{ background:#ff9d1f; }
+
+.rent-btn.disabled{
+    background:#2a2a2a;
+    color:#7c7c7c;
+    cursor:not-allowed;
+}
+
+@media(max-width:900px){
+    .bike-grid{ grid-template-columns:1fr 1fr; }
+}
+
+@media(max-width:600px){
+    .bike-grid{ grid-template-columns:1fr; }
+}
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo"><i class="fa-solid fa-circle"></i>RideCircle</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="live-tracking-combined.html">Live Tracking</a>
+        <a href="bike-rentals-combined.html" class="active">Bike Rentals</a>
+        <a href="community-combined.html">Community</a>
+        <a href="about-combined.html">About</a>
+        <a href="contact-combined.html">Contact</a>
+    </nav>
+    <div class="buttons">
+        <a href="login-combined.html" class="login">Login</a>
+        <a href="login-combined.html" class="signup">Sign Up</a>
+    </div>
+</header>
+
+<section class="page-hero">
+    <h1>Bike <span>Rentals</span></h1>
+    <p>Premium motorcycles, ready to ride. Pickup and doorstep delivery available.</p>
+</section>
+
+<div class="search-bar">
+    <div class="search-field">
+        <label>PICKUP LOCATION</label>
+        <input type="text" id="search-location" value="Manali, Himachal Pradesh">
+    </div>
+    <div class="search-field">
+        <label>PICKUP DATE</label>
+        <input type="date" id="search-date">
+    </div>
+    <button class="search-btn" id="search-btn"><i class="fa-solid fa-magnifying-glass"></i> Search Available Bikes</button>
+</div>
+
+<div style="width:100%; padding:0 8% 30px; display:flex; justify-content:flex-end;">
+    <a href="rentor-combined.html" class="btn btn-outline" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+        <i class="fa-solid fa-key"></i> Own a bike? List it as a Rentor
+    </a>
+</div>
+
+<div class="filters-row">
+    <div class="chip-row">
+        <span class="chip active">All</span>
+        <span class="chip">Adventure</span>
+        <span class="chip">Touring</span>
+        <span class="chip">Classic</span>
+        <span class="chip">Sport</span>
+    </div>
+    <div class="chip-row">
+        <span class="chip active-blue">All Prices</span>
+        <span class="chip">Under ₹1500</span>
+        <span class="chip">₹1500-₹2500</span>
+        <span class="chip">Above ₹2500</span>
+    </div>
+</div>
+
+<p class="results-count" style="padding:0 8% 20px;" id="results-count">Loading bikes…</p>
+
+<div class="bike-grid" id="bike-grid">
+    <p style="padding:40px 8%; color:var(--text-dim);">Loading available bikes…</p>
+</div>
+
+<!--=============== FOOTER ===============-->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h2 class="footer-logo"><span>Ride</span>Circle</h2>
+            <p>The premium biking community for group rides, live tracking, and adventure exploration worldwide.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h3>PLATFORM</h3>
+            <a href="live-tracking-combined.html">Live Tracking</a>
+            <a href="bike-rentals-combined.html">Bike Rentals</a>
+            <a href="community-combined.html">Community Rides</a>
+            <a href="rentor-combined.html">List Your Bike</a>
+            <a href="#">Route Planner</a>
+            <a href="#">Ride History</a>
+        </div>
+        <div class="footer-col">
+            <h3>COMPANY</h3>
+            <a href="about-combined.html">About Us</a>
+            <a href="contact-combined.html">Contact</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+            <a href="#">Blog</a>
+        </div>
+        <div class="footer-col app">
+            <h3>GET THE APP</h3>
+            <p>Track rides on the go. Available on iOS and Android.</p>
+            <button class="store-btn"><i class="fa-brands fa-apple"></i>App Store</button>
+            <button class="store-btn"><i class="fa-brands fa-google-play"></i>Google Play</button>
+        </div>
+    </div>
+    <hr>
+    <div class="footer-bottom">
+        <p>© 2026 RideCircle Technologies Pvt. Ltd. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+        </div>
+    </div>
+</footer>
+
+<script src="api.js"></script>
+<script src="auth.js"></script>
+<script>
+    let ALL_BIKES = [];
+    let activeCategory = "All";
+    let activePriceBand = "All Prices";
+    let locationQuery = "";
+
+    async function rcRent(bikeId, btn){
+        await RC_AUTH.ready;
+        const user = RC_AUTH.currentUser();
+        if(!user){
+            window.location.href = "login-combined.html?next=bike-rentals-combined.html";
+            return;
+        }
+        btn.disabled = true;
+        btn.textContent = "Sending request…";
+        const res = await RC_API.rentBike(bikeId, 1);
+        if(res.ok){
+            btn.textContent = res.alreadyRequested ? "Request pending ✓" : "Requested ✓";
+            btn.style.background = "#2a2a2a";
+            btn.style.color = "#4ade80";
+            btn.style.cursor = "default";
+        } else {
+            btn.disabled = false;
+            btn.textContent = "Rent Now";
+            alert(res.error || "Couldn't submit request.");
+        }
+    }
+
+    function priceMatches(price, band){
+        if(band === "All Prices") return true;
+        if(band === "Under ₹1500") return price < 1500;
+        if(band === "₹1500-₹2500") return price >= 1500 && price <= 2500;
+        if(band === "Above ₹2500") return price > 2500;
+        return true;
+    }
+
+    function renderBikes(){
+        const grid = document.getElementById("bike-grid");
+        const filtered = ALL_BIKES.filter(b =>
+            (activeCategory === "All" || b.category === activeCategory) &&
+            priceMatches(b.price, activePriceBand) &&
+            (!locationQuery || (b.city || "").toLowerCase().includes(locationQuery))
+        );
+
+        document.getElementById("results-count").textContent = filtered.length + " bikes found";
+
+        if(!filtered.length){
+            grid.innerHTML = `<p style="padding:40px 8%; color:var(--text-dim);">No bikes match those filters yet.</p>`;
+            return;
+        }
+
+        grid.innerHTML = filtered.map(b => `
+            <div class="bike-card ${!b.available ? "booked" : ""}" data-id="${b.id}">
+                <div class="bike-photo" style="background:${b.thumb};">
+                    <span class="avail-badge tag-badge ${b.available ? "green" : "red"}" style="margin:12px;">${b.available ? "Available" : "Booked"}</span>
+                    <span class="cat-badge" style="position:absolute; top:12px; right:12px;">${b.category}</span>
+                </div>
+                <div class="bike-info">
+                    <div class="top-row">
+                        <div>
+                            <h3>${b.name}</h3>
+                            <div class="brand">${b.brand} · listed by ${b.ownerName}</div>
+                        </div>
+                        <div class="price">₹${b.price}<span>/day</span></div>
+                    </div>
+                    <div class="rating">${b.rating ? "★★★★★ " : "New "}<span>${b.rating ? b.rating + " (" + b.reviewCount + " reviews)" : "New listing"} · ${b.city}</span></div>
+                    <div class="spec-row">
+                        ${(b.specs || []).map(s => `<span class="spec-chip">${s}</span>`).join("")}
+                    </div>
+                    <button class="rent-btn ${!b.available ? "disabled" : ""}" ${!b.available ? "disabled" : ""}>${b.available ? "Rent Now" : "Not Available"}</button>
+                </div>
+            </div>
+        `).join("");
+
+        grid.querySelectorAll(".bike-card").forEach(card => {
+            const btn = card.querySelector(".rent-btn:not(.disabled)");
+            if(btn) btn.addEventListener("click", () => rcRent(card.dataset.id, btn));
+        });
+    }
+
+    document.querySelectorAll(".chip-row:first-of-type .chip").forEach(chip => {
+        chip.addEventListener("click", () => {
+            document.querySelectorAll(".chip-row:first-of-type .chip").forEach(c => c.classList.remove("active"));
+            chip.classList.add("active");
+            activeCategory = chip.textContent.trim();
+            renderBikes();
+        });
+    });
+
+    document.querySelectorAll(".chip-row:last-of-type .chip").forEach(chip => {
+        chip.addEventListener("click", () => {
+            document.querySelectorAll(".chip-row:last-of-type .chip").forEach(c => c.classList.remove("active-blue"));
+            chip.classList.add("active-blue");
+            activePriceBand = chip.textContent.trim();
+            renderBikes();
+        });
+    });
+
+    function runSearch(){
+        locationQuery = document.getElementById("search-location").value.trim().toLowerCase();
+        renderBikes();
+    }
+    document.getElementById("search-btn").addEventListener("click", runSearch);
+    document.getElementById("search-location").addEventListener("keydown", (e) => {
+        if(e.key === "Enter") runSearch();
+    });
+
+    (async function init(){
+        const res = await RC_API.bikes();
+        ALL_BIKES = res.ok ? res.bikes : [];
+        runSearch();
+    })();
+</script>
+<script src="script.js"></script>
+</body>
+</html>

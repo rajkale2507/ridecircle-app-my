@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideCircle</title>
+
+    <link rel="stylesheet" href="site.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+.hero{
+
+height:100vh;
+
+background:linear-gradient(160deg,#3a2c18 0%,#241d10 45%,#141414 100%);
+background-size:cover;
+background-position:center;
+
+position:relative;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+text-align:center;
+
+}
+
+.overlay{
+
+position:absolute;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.55);
+
+}
+
+.content{
+
+position:relative;
+z-index:5;
+
+}
+
+.badge{
+
+display:inline-block;
+padding:10px 20px;
+
+border:1px solid rgba(255,255,255,.3);
+
+border-radius:30px;
+
+margin-bottom:25px;
+
+}
+
+h1{
+
+font-size:60px;
+font-weight:800;
+line-height:1.2;
+
+}
+
+span{
+
+color:#ff8c1a;
+
+}
+
+p{
+
+font-size:22px;
+
+color:#ddd;
+
+margin:30px auto;
+
+width:70%;
+
+}
+
+.hero-btns{
+
+margin-top:30px;
+
+}
+
+.hero-btns button,
+.hero-btns a{
+
+padding:18px 35px;
+
+border:none;
+
+border-radius:15px;
+
+font-size:18px;
+
+margin:10px;
+
+cursor:pointer;
+
+text-align:center;
+
+}
+
+.buttons a.login,
+.buttons a.signup{
+    display:inline-flex;
+    align-items:center;
+}
+
+.orange{
+
+background:#ff7b00;
+color:white;
+
+}
+
+.dark{
+
+background:#333;
+color:white;
+
+}
+
+.blue{
+
+background:#2b73ff;
+color:white;
+
+}
+.badge{
+    margin-top: 80px;
+}
+.stats{
+    background:#0d1117;
+    display:flex;
+    justify-content:center;
+    gap:120px;
+    padding:70px 20px;
+    text-align:center;
+}
+
+.stat-box h2{
+    color:#ff7b00;
+    font-size:60px;
+    font-weight:800;
+}
+
+.stat-box p{
+    color:#bdbdbd;
+    font-size:20px;
+    margin-top:10px;
+}
+
+.features-title{
+    background:#0d1117;
+    text-align:center;
+    padding:80px 20px;
+}
+
+.tag{
+    display:inline-block;
+    padding:10px 25px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:30px;
+    color:#2f80ff;
+    font-size:15px;
+    font-weight:600;
+    margin-bottom:25px;
+}
+
+.features-title h1{
+    font-size:65px;
+    font-weight:800;
+    color:white;
+}
+
+.features-title span{
+    color:#ff7b00;
+}
+
+.features-title p{
+    width:70%;
+    margin:25px auto;
+    color:#bdbdbd;
+    font-size:22px;
+    line-height:1.7;
+}
+.features{
+    width:92%;
+    margin:60px auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.card{
+    background:#181b24;
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:20px;
+    padding:28px 24px;
+    min-height:210px;
+    transition:0.3s ease;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:#ff8c1a;
+    box-shadow:0 12px 30px rgba(255,140,26,.18);
+}
+.icon{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:24px;
+    margin-bottom:22px;
+}
+.card h3{
+    color:white;
+    font-size:24px;
+    margin-bottom:15px;
+}
+
+.card p{
+    color:#a9a9a9;
+    line-height:1.8;
+    font-size:17px;
+}
+
+.special{
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.rocket{
+    font-size:45px;
+    margin-bottom:20px;
+}
+.card:nth-child(1) .icon{
+    background:#3b2418;
+}
+
+.card:nth-child(2) .icon{
+    background:#1d2946;
+}
+
+.card:nth-child(3) .icon{
+    background:#183626;
+}
+
+.card:nth-child(4) .icon{
+    background:#352322;
+}
+
+.card:nth-child(5) .icon{
+    background:#20304d;
+}
+
+.card:nth-child(6) .icon{
+    background:#21411f;
+}
+
+.card:nth-child(7) .icon{
+    background:#3d2c59;
+}
+
+.card:nth-child(8){
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+.card h3{
+    color:#ffffff;
+    font-size:26px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.card p{
+    color:#9ea4b2;
+    font-size:18px;
+    line-height:1.7;
+}
+.ride-mode{
+    width:90%;
+    margin:100px auto;
+    text-align:center;
+}
+
+.mode-tag{
+    display:inline-block;
+    padding:10px 25px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:30px;
+    color:#3b82f6;
+    font-size:14px;
+    margin-bottom:25px;
+}
+
+.ride-mode h2{
+    font-size:64px;
+    color:#fff;
+    margin-bottom:20px;
+    font-weight:800;
+}
+
+.ride-mode span{
+    color:#ff8c1a;
+}
+
+.ride-mode p{
+    color:#9ca3af;
+    font-size:22px;
+    width:60%;
+    margin:0 auto 60px;
+    line-height:1.7;
+}
+
+.ride-cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.ride-card{
+    background:#171b24;
+    border-radius:25px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.08);
+    transition:.3s;
+}
+
+.ride-card:hover{
+    transform:translateY(-8px);
+}
+
+.ride-card img{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+}
+
+.ride-content{
+    padding:25px;
+    text-align:left;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:20px;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.green{
+    background:#173b24;
+    color:#4ade80;
+}
+
+.blue{
+    background:#1d3557;
+    color:#60a5fa;
+}
+
+.orange{
+    background:#4b2c10;
+    color:#fb923c;
+}
+
+.ride-content h3{
+    color:#fff;
+    margin-bottom:15px;
+}
+
+.ride-content p{
+    width:100%;
+    margin-bottom:25px;
+    font-size:17px;
+}
+
+.ride-content button{
+    background:#ff8c1a;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:12px;
+    cursor:pointer;
+}
+    @media(max-width:900px){
+        h1{ font-size:38px; }
+        .features-title h1{ font-size:40px; }
+        .features-title p, .ride-mode p, p{ width:90%; font-size:18px; }
+        .features{ grid-template-columns:repeat(2,1fr); }
+        .ride-cards{ grid-template-columns:1fr; }
+        .stats{ flex-wrap:wrap; gap:40px; }
+        .stat-box h2{ font-size:38px; }
+    }
+    @media(max-width:500px){
+        h1{ font-size:30px; }
+        .features-title h1{ font-size:30px; }
+        .features{ grid-template-columns:1fr; }
+        .stats{ gap:25px; }
+    }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo"><i class="fa-solid fa-circle"></i>RideCircle</div>
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="live-tracking-combined.html">Live Tracking</a>
+        <a href="bike-rentals-combined.html">Bike Rentals</a>
+        <a href="community-combined.html">Community</a>
+        <a href="about-combined.html">About</a>
+        <a href="contact-combined.html">Contact</a>
+    </nav>
+    <div class="buttons">
+        <a href="login-combined.html" class="login">Login</a>
+        <a href="login-combined.html" class="signup">Sign Up</a>
+    </div>
+</header>
+<section class="hero">
+
+<div class="overlay"></div>
+
+<div class="content">
+
+<div class="badge">
+
+
+
+🟢 3,200+ rides happening right now
+
+</div>
+
+<h1>
+
+Ride Together.<br>
+
+<span>Track Together.</span><br>
+
+Explore Together.
+
+</h1>
+
+<p>
+
+The ultimate platform for group rides, live GPS tracking,
+route navigation and adventure communities.
+
+</p>
+
+<div class="hero-btns">
+
+<a href="live-tracking-combined.html" class="orange" style="text-decoration:none; display:inline-block;">
+Start Ride
+</a>
+
+<a href="community-combined.html" class="dark" style="text-decoration:none; display:inline-block;">
+Join Community
+</a>
+
+<a href="bike-rentals-combined.html" class="blue" style="text-decoration:none; display:inline-block;">
+Rent a Bike
+</a>
+
+</div>
+
+</div>
+
+</section>
+<section class="stats">
+
+    <div class="stat-box">
+        <h2>12,400+</h2>
+        <p>Active Riders</p>
+    </div>
+
+    <div class="stat-box">
+        <h2>3,200+</h2>
+        <p>Ongoing Rides</p>
+    </div>
+
+    <div class="stat-box">
+        <h2>89K+</h2>
+        <p>Community Members</p>
+    </div>
+
+</section>
+
+<section class="features-title">
+
+    <div class="tag">
+        EVERYTHING YOU NEED
+    </div>
+
+    <h1>
+        Built for <span>Riders</span>
+    </h1>
+
+    <p>
+        From solo adventures to 500-rider community runs — RideCircle has every feature to make your ride safer, smarter, and more connected.
+    </p>
+
+</section>
+<section class="features">
+
+    <div class="card">
+        <div class="icon">📍</div>
+        <h3>Live Rider Tracking</h3>
+        <p>Real-time GPS tracking for every rider in your group, updated every 5 seconds.</p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🗺️</div>
+        <h3>Route Navigation</h3>
+        <p>Turn-by-turn navigation with offline maps and road condition alerts.</p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🏍️</div>
+        <h3>Solo Ride Mode</h3>
+        <p>Log solo adventures with automatic route recording and post-ride analytics.</p>
+    </div>
+
+    <div class="card">
+        <div class="icon">👥</div>
+        <h3>Friends Ride Mode</h3>
+        <p>Create private ride sessions with real-time location sharing and in-app chat.</p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🌐</div>
+        <h3>Community Ride Mode</h3>
+        <p>Discover local riders, join public events, and connect with nearby communities.</p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🔑</div>
+        <h3>Bike Rentals</h3>
+        <p>Rent bikes directly through RideCircle with verified owners and secure payments.</p>
+    </div>
+
+    <div class="card">
+        <div class="icon">📊</div>
+        <h3>Ride History</h3>
+        <p>Track your previous rides, distances, speed, and achievements in one place.</p>
+    </div>
+
+    <div class="card special">
+        <div class="rocket">🚀</div>
+        <h3>Start Free</h3>
+        <p>No credit card required</p>
+    </div>
+
+</section>
+<section class="ride-mode">
+
+    <div class="mode-tag">
+        CHOOSE YOUR RIDE MODE
+    </div>
+
+    <h2>
+        Choose Your <span>Ride Mode</span>
+    </h2>
+
+    <p>
+        Whether you ride alone or lead a convoy of hundreds,
+        there's a mode designed exactly for you.
+    </p>
+
+    <div class="ride-cards">
+
+        <div class="ride-card">
+            <div class="ride-img" style="height:230px;background:linear-gradient(160deg,#5a4632,#2b2116);"></div>
+
+            <div class="ride-content">
+                <span class="badge green">● Solo Mode</span>
+
+                <h3>Solo Adventures</h3>
+
+                <p>
+                    Ride independently with automatic tracking,
+                    route recording and safety monitoring.
+                </p>
+
+                <a href="live-tracking-combined.html"><button>Start Solo Ride</button></a>
+            </div>
+        </div>
+
+        <div class="ride-card">
+            <div class="ride-img" style="height:230px;background:linear-gradient(160deg,#3a3a3a,#111);"></div>
+
+            <div class="ride-content">
+                <span class="badge blue">● Friends Mode</span>
+
+                <h3>Ride with Friends</h3>
+
+                <p>
+                    Create private rides with live location sharing
+                    and group navigation.
+                </p>
+
+                <a href="community-combined.html"><button>Invite Friends</button></a>
+            </div>
+        </div>
+
+        <div class="ride-card">
+            <div class="ride-img" style="height:230px;background:linear-gradient(160deg,#4a5a35,#1c2416);"></div>
+
+            <div class="ride-content">
+                <span class="badge orange">● Community Mode</span>
+
+                <h3>Community Events</h3>
+
+                <p>
+                    Join hundreds of riders in exciting events
+                    and adventures.
+                </p>
+
+                <a href="community-combined.html"><button>Explore Events</button></a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <h2 class="footer-logo"><span>Ride</span>Circle</h2>
+            <p>The premium biking community for group rides, live tracking, and adventure exploration worldwide.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3>PLATFORM</h3>
+            <a href="live-tracking-combined.html">Live Tracking</a>
+            <a href="bike-rentals-combined.html">Bike Rentals</a>
+            <a href="community-combined.html">Community Rides</a>
+            <a href="rentor-combined.html">List Your Bike</a>
+            <a href="#">Route Planner</a>
+            <a href="#">Ride History</a>
+        </div>
+
+        <div class="footer-col">
+            <h3>COMPANY</h3>
+            <a href="about-combined.html">About Us</a>
+            <a href="contact-combined.html">Contact</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+            <a href="#">Blog</a>
+        </div>
+
+        <div class="footer-col app">
+            <h3>GET THE APP</h3>
+            <p>Track rides on the go. Available on iOS and Android.</p>
+            <button class="store-btn"><i class="fa-brands fa-apple"></i>App Store</button>
+            <button class="store-btn"><i class="fa-brands fa-google-play"></i>Google Play</button>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="footer-bottom">
+        <p>© 2026 RideCircle Technologies Pvt. Ltd. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+        </div>
+    </div>
+</footer>
+
+<script src="api.js"></script>
+<script src="auth.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

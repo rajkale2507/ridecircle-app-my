@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile — RideCircle</title>
+
+    <link rel="stylesheet" href="site.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+.profile-hero{
+    padding:150px 8% 0;
+    background:
+        linear-gradient(180deg, rgba(11,11,11,.3), rgba(11,11,11,.95)),
+        linear-gradient(120deg, #33291a 0%, #1c2417 50%, #0d1420 100%);
+    padding-bottom:40px;
+}
+
+.profile-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.profile-id{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.profile-avatar{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:var(--orange);
+    color:#1a0f00;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    font-size:26px;
+    flex-shrink:0;
+}
+
+.profile-id h2{
+    font-size:26px;
+    margin-bottom:6px;
+}
+
+.profile-id .loc{
+    font-size:13px;
+    color:var(--text-dim);
+    margin-bottom:8px;
+}
+
+.profile-id .badges{
+    display:flex;
+    gap:10px;
+}
+
+/* ---- TABS ---- */
+
+.profile-tabs{
+    padding:30px 8% 0;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.tab-btn{
+    padding:10px 22px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    color:#c7c7c7;
+    font-size:14px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.tab-btn.active{
+    background:var(--orange);
+    color:white;
+    border-color:var(--orange);
+}
+
+/* ---- RIDE HISTORY LIST ---- */
+
+.history-list{
+    padding:24px 8% 100px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.history-row{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px 22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    transition:.25s;
+}
+
+.history-row:hover{
+    border-color:var(--orange);
+}
+
+.history-row .route-name{
+    font-size:15px;
+    font-weight:600;
+    margin-bottom:6px;
+}
+
+.history-row .row-meta{
+    display:flex;
+    gap:16px;
+    font-size:13px;
+    color:var(--text-dim);
+    flex-wrap:wrap;
+}
+
+.history-row .stars{
+    color:#facc15;
+    font-size:14px;
+}
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo"><i class="fa-solid fa-circle"></i>RideCircle</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="live-tracking-combined.html">Live Tracking</a>
+        <a href="bike-rentals-combined.html">Bike Rentals</a>
+        <a href="community-combined.html">Community</a>
+        <a href="about-combined.html">About</a>
+        <a href="contact-combined.html">Contact</a>
+    </nav>
+    <div class="buttons">
+        <a href="login-combined.html" class="login">Login</a>
+        <a href="login-combined.html" class="signup">Sign Up</a>
+    </div>
+</header>
+
+<section class="profile-hero">
+    <div class="profile-top">
+        <div class="profile-id">
+           <div class="profile-avatar" id="p-avatar">--</div>
+            <div>
+                <h2 id="p-name">Loading...</h2>
+                
+                <div class="badges">
+                    <span class="tag-badge orange">🏅 Iron Rider</span>
+                    <span class="tag-badge green">● Online</span>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-outline">Edit Profile</button>
+    </div>
+</section>
+
+<div id="p-guest-note" style="display:none; width:84%; margin:0 auto 10px;">
+    <div style="background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:16px 20px; font-size:14px; color:var(--text-dim);">
+        You're viewing sample profile data. <a href="login-combined.html?next=profile-combined.html" style="color:var(--orange); text-decoration:none; font-weight:600;">Sign in</a> to see your own rides and listings here.
+    </div>
+</div>
+
+<div id="p-joined-rides" style="width:84%; margin:0 auto 10px; display:none;">
+    <h3 style="font-size:16px; margin:20px 0 12px;">Rides you've joined</h3>
+    <div id="p-joined-list" style="display:flex; flex-direction:column; gap:10px;"></div>
+</div>
+
+<section class="stat-strip" style="grid-template-columns:repeat(4,1fr); padding-top:30px;">
+    <div class="stat-card orange">
+        <h2>4,820 km</h2>
+        <p>Total Distance</p>
+    </div>
+    <div class="stat-card blue">
+        <h2>47</h2>
+        <p>Total Rides</p>
+    </div>
+    <div class="stat-card green">
+        <h2>12</h2>
+        <p>Group Rides</p>
+    </div>
+    <div class="stat-card purple">
+        <h2>3</h2>
+        <p>Bike Rentals</p>
+    </div>
+</section>
+
+<div class="profile-tabs">
+    <button class="tab-btn active">My Requests</button>
+</div>
+
+<div class="history-list" id="p-requests-list">
+    <p style="color:var(--text-dim);">Sign in to see your join and rental requests.</p>
+</div>
+
+<!--=============== FOOTER ===============-->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h2 class="footer-logo"><span>Ride</span>Circle</h2>
+            <p>The premium biking community for group rides, live tracking, and adventure exploration worldwide.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h3>PLATFORM</h3>
+            <a href="live-tracking-combined.html">Live Tracking</a>
+            <a href="bike-rentals-combined.html">Bike Rentals</a>
+            <a href="community-combined.html">Community Rides</a>
+            <a href="rentor-combined.html">List Your Bike</a>
+            <a href="#">Route Planner</a>
+            <a href="#">Ride History</a>
+        </div>
+        <div class="footer-col">
+            <h3>COMPANY</h3>
+            <a href="about-combined.html">About Us</a>
+            <a href="contact-combined.html">Contact</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+            <a href="#">Blog</a>
+        </div>
+        <div class="footer-col app">
+            <h3>GET THE APP</h3>
+            <p>Track rides on the go. Available on iOS and Android.</p>
+            <button class="store-btn"><i class="fa-brands fa-apple"></i>App Store</button>
+            <button class="store-btn"><i class="fa-brands fa-google-play"></i>Google Play</button>
+        </div>
+    </div>
+    <hr>
+    <div class="footer-bottom">
+        <p>© 2026 RideCircle Technologies Pvt. Ltd. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+        </div>
+    </div>
+</footer>
+
+<script src="api.js"></script>
+<script src="auth.js"></script>
+<script src="script.js"></script>
+<script>
+function timeAgo(ts){
+    if(!ts) return "";
+    const diff = Date.now() - ts;
+    const mins = Math.round(diff / 60000);
+    if(mins < 60) return mins + "m ago";
+    const hrs = Math.round(mins / 60);
+    if(hrs < 24) return hrs + "h ago";
+    return Math.round(hrs / 24) + "d ago";
+}
+
+const STATUS_BADGE = {
+    pending: '<span class="tag-badge blue">Pending</span>',
+    approved: '<span class="tag-badge green">Approved</span>',
+    rejected: '<span class="tag-badge red">Rejected</span>'
+};
+
+async function loadMyRequests(){
+    const list = document.getElementById("p-requests-list");
+    const res = await RC_API.myRequests();
+    if(!res.ok){
+        list.innerHTML = `<p style="color:var(--text-dim);">Couldn't load your requests.</p>`;
+        return;
+    }
+
+    const rows = [];
+
+    (res.joinRequests || []).forEach(r => {
+        rows.push({
+            title: r.rideTitle,
+            sub: "Ride join request",
+            status: r.status,
+            createdAt: r.createdAt
+        });
+    });
+
+    (res.rentRequests || []).forEach(r => {
+        rows.push({
+            title: r.bikeName,
+            sub: `Bike rental · ${r.days} day${r.days === 1 ? "" : "s"}`,
+            status: r.status,
+            createdAt: r.createdAt
+        });
+    });
+
+    if(!rows.length){
+        list.innerHTML = `<p style="color:var(--text-dim);">You haven't made any join or rental requests yet.</p>`;
+        return;
+    }
+
+    rows.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+    list.innerHTML = rows.map(r => `
+        <div class="history-row">
+            <div>
+                <div class="route-name">${r.title || "Untitled"}</div>
+                <div class="row-meta">
+                    <span>${r.sub}</span>
+                    <span>${timeAgo(r.createdAt)}</span>
+                </div>
+            </div>
+            ${STATUS_BADGE[r.status] || ""}
+        </div>
+    `).join("");
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+    const user = await RC_AUTH.init();
+
+    if (!user) {
+        document.getElementById("p-guest-note").style.display = "block";
+        return;
+    }
+
+    document.getElementById("p-guest-note").style.display = "none";
+
+    const initials = (user.name || "U")
+    .split(" ")
+    .map(n => n[0])
+    .join("")
+    .toUpperCase();
+    document.getElementById("p-avatar").textContent = initials;
+    document.getElementById("p-name").textContent = user.name;
+
+    loadMyRequests();
+});
+</script>
+</body>
+</html>

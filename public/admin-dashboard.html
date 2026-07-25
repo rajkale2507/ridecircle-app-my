@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — RideCircle</title>
+
+    <link rel="stylesheet" href="site.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+body{ background:var(--bg); }
+
+.admin-shell{
+    display:grid;
+    grid-template-columns:240px 1fr;
+    min-height:100vh;
+}
+
+.admin-sidebar{
+    background:#0d0d0d;
+    border-right:1px solid var(--border);
+    padding:26px 18px;
+    position:sticky;
+    top:0;
+    height:100vh;
+}
+
+.admin-logo{
+    display:flex; align-items:center; gap:10px;
+    font-size:19px; font-weight:700;
+    margin-bottom:34px;
+    padding:0 8px;
+}
+.admin-logo i{ color:var(--orange); }
+
+.admin-nav-item{
+    display:flex; align-items:center; gap:12px;
+    padding:12px 14px;
+    border-radius:10px;
+    color:var(--text-dim);
+    font-size:14px;
+    cursor:pointer;
+    margin-bottom:4px;
+    transition:.2s;
+    position:relative;
+}
+.admin-nav-item:hover{ background:#161616; color:white; }
+.admin-nav-item.active{ background:rgba(255,140,0,.12); color:var(--orange); }
+.admin-nav-item .count{
+    margin-left:auto;
+    background:var(--orange);
+    color:white;
+    font-size:11px;
+    font-weight:700;
+    padding:2px 7px;
+    border-radius:10px;
+}
+
+.admin-main{ padding:34px 40px 80px; max-width:1100px; }
+
+.admin-topbar{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:28px;
+}
+.admin-topbar h1{ font-size:24px; }
+.admin-topbar .who{ font-size:13px; color:var(--text-dim); }
+.admin-topbar .who b{ color:white; }
+.logout-btn{
+    background:#1a1a1a; border:1px solid var(--border); color:#c7c7c7;
+    padding:9px 16px; border-radius:9px; font-size:13px; cursor:pointer;
+}
+.logout-btn:hover{ border-color:var(--orange); color:white; }
+
+.admin-panel{ display:none; }
+.admin-panel.active{ display:block; }
+
+.overview-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:10px;
+}
+.ov-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:16px;
+    padding:20px;
+}
+.ov-card h2{ font-size:28px; margin-bottom:4px; }
+.ov-card p{ font-size:12px; color:var(--text-dim); }
+.ov-card.alert h2{ color:var(--orange); }
+
+.admin-table{ width:100%; border-collapse:collapse; margin-top:10px; }
+.admin-table th{
+    text-align:left; font-size:11px; letter-spacing:.5px; color:var(--text-dim);
+    padding:10px 14px; border-bottom:1px solid var(--border);
+}
+.admin-table td{
+    padding:14px; border-bottom:1px solid var(--border); font-size:14px; vertical-align:middle;
+}
+.admin-table tr:hover td{ background:#141414; }
+
+.a-btn{
+    padding:7px 14px; border-radius:8px; border:none; font-size:12px; font-weight:600; cursor:pointer; margin-right:6px;
+}
+.a-btn.approve{ background:rgba(74,222,128,.15); color:#4ade80; }
+.a-btn.approve:hover{ background:#4ade80; color:#062b14; }
+.a-btn.reject{ background:rgba(248,113,113,.15); color:#f87171; }
+.a-btn.reject:hover{ background:#f87171; color:#2b0a0a; }
+.a-btn.delete{ background:rgba(248,113,113,.1); color:#f87171; }
+.a-btn.delete:hover{ background:#f87171; color:#2b0a0a; }
+.a-btn.neutral{ background:#1e1e1e; color:#c7c7c7; }
+.a-btn.neutral:hover{ background:#2a2a2a; color:white; }
+
+.empty-note{ padding:40px; text-align:center; color:var(--text-dim); font-size:14px; }
+
+.new-ride-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:22px; margin-bottom:24px;
+}
+.new-ride-card h3{ font-size:15px; margin-bottom:16px; }
+.nr-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+.nr-grid input, .nr-grid select, .nr-grid textarea{
+    background:#0d0d0d; border:1px solid var(--border); border-radius:9px; padding:10px 12px; color:white; font-size:13px; width:100%;
+}
+.nr-full{ grid-column:1 / -1; }
+
+.section-title{ font-size:16px; margin:30px 0 4px; }
+    </style>
+</head>
+
+<body>
+
+<div id="admin-gate" style="display:none; min-height:100vh; align-items:center; justify-content:center; text-align:center; flex-direction:column; gap:14px;">
+    <h2>Admin access required</h2>
+    <p style="color:var(--text-dim);">Please sign in with an administrator account.</p>
+    <a href="admin-login.html" class="btn btn-orange" style="text-decoration:none; padding:12px 26px;">Go to Admin Login</a>
+</div>
+
+<div class="admin-shell" id="admin-shell" style="display:none;">
+
+    <div class="admin-sidebar">
+        <div class="admin-logo"><i class="fa-solid fa-circle"></i>RideCircle</div>
+
+        <div class="admin-nav-item active" data-panel="overview"><i class="fa-solid fa-chart-simple"></i> Overview</div>
+        <div class="admin-nav-item" data-panel="join-requests"><i class="fa-solid fa-route"></i> Join Requests <span class="count" id="nav-count-join" style="display:none;">0</span></div>
+        <div class="admin-nav-item" data-panel="rent-requests"><i class="fa-solid fa-motorcycle"></i> Rent Requests <span class="count" id="nav-count-rent" style="display:none;">0</span></div>
+        <div class="admin-nav-item" data-panel="bikes"><i class="fa-solid fa-key"></i> Bike Listings <span class="count" id="nav-count-bikes" style="display:none;">0</span></div>
+        <div class="admin-nav-item" data-panel="rides"><i class="fa-solid fa-flag-checkered"></i> Rides</div>
+        <div class="admin-nav-item" data-panel="users"><i class="fa-solid fa-users"></i> Users</div>
+
+        <div style="margin-top:24px; padding-top:18px; border-top:1px solid var(--border);">
+            <a href="index.html" class="admin-nav-item" style="text-decoration:none;"><i class="fa-solid fa-arrow-left"></i> Back to site</a>
+        </div>
+    </div>
+
+    <div class="admin-main">
+        <div class="admin-topbar">
+            <h1 id="panel-title">Overview</h1>
+            <div style="display:flex; align-items:center; gap:14px;">
+                <span class="who">Signed in as <b id="admin-name"></b></span>
+                <button class="logout-btn" id="admin-logout">Log Out</button>
+            </div>
+        </div>
+
+        <!-- OVERVIEW -->
+        <div class="admin-panel active" data-panel="overview">
+            <div class="overview-grid" id="overview-grid"></div>
+        </div>
+
+        <!-- JOIN REQUESTS -->
+        <div class="admin-panel" data-panel="join-requests">
+            <table class="admin-table" id="join-requests-table">
+                <thead><tr><th>Rider</th><th>Ride</th><th>Requested</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- RENT REQUESTS -->
+        <div class="admin-panel" data-panel="rent-requests">
+            <table class="admin-table" id="rent-requests-table">
+                <thead><tr><th>Rider</th><th>Bike</th><th>Days</th><th>Requested</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- BIKE LISTINGS -->
+        <div class="admin-panel" data-panel="bikes">
+            <table class="admin-table" id="bikes-table">
+                <thead><tr><th>Bike</th><th>Owner</th><th>Price/day</th><th>City</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- RIDES -->
+        <div class="admin-panel" data-panel="rides">
+            <div class="new-ride-card">
+                <h3>Add a new community ride</h3>
+                <form id="new-ride-form">
+                    <div class="nr-grid">
+                        <input type="text" id="nr-title" placeholder="Ride title" required>
+                        <input type="text" id="nr-club" placeholder="Club / organiser">
+                        <input type="text" id="nr-route" placeholder="Route (A → B → C)">
+                        <select id="nr-difficulty">
+                            <option>Easy</option><option selected>Medium</option><option>Hard</option>
+                        </select>
+                        <input type="text" id="nr-date" placeholder="Date (e.g. Sep 20, 2026)">
+                        <input type="text" id="nr-duration" placeholder="Duration (e.g. 3 days)">
+                        <input type="number" id="nr-distance" placeholder="Distance (km)">
+                        <input type="number" id="nr-capacity" placeholder="Rider capacity">
+                        <textarea class="nr-full" id="nr-about" placeholder="About this ride…" rows="2"></textarea>
+                    </div>
+                    <button type="submit" class="a-btn approve" style="padding:10px 20px;">Create Ride</button>
+                </form>
+            </div>
+
+            <h3 class="section-title">Existing rides</h3>
+            <table class="admin-table" id="rides-table">
+                <thead><tr><th>Title</th><th>Route</th><th>Date</th><th>Joined / Capacity</th><th>Actions</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- USERS -->
+        <div class="admin-panel" data-panel="users">
+            <table class="admin-table" id="users-table">
+                <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="api.js"></script>
+<script>
+    function fmtDate(ts){ return new Date(ts).toLocaleDateString(undefined, { day:"numeric", month:"short", year:"numeric" }); }
+    function statusBadge(status){
+        const map = { pending: ["blue","Pending"], approved: ["green","Approved"], rejected: ["red","Rejected"] };
+        const [cls, label] = map[status] || ["blue", status];
+        return `<span class="tag-badge ${cls}">${label}</span>`;
+    }
+
+    let ME = null;
+
+    async function requireAdmin(){
+        const res = await RC_API.me();
+        if(!res.ok || !res.user || res.user.role !== "admin"){
+            document.getElementById("admin-gate").style.display = "flex";
+            return false;
+        }
+        ME = res.user;
+        document.getElementById("admin-shell").style.display = "grid";
+        document.getElementById("admin-name").textContent = ME.name;
+        return true;
+    }
+
+    document.getElementById("admin-logout").addEventListener("click", async () => {
+        await RC_API.logout();
+        window.location.href = "admin-login.html";
+    });
+
+    /* ---------------- nav ---------------- */
+    const navItems = document.querySelectorAll(".admin-nav-item[data-panel]");
+    const panels = document.querySelectorAll(".admin-panel");
+    const titleMap = {
+        overview: "Overview", "join-requests": "Join Requests", "rent-requests": "Rent Requests",
+        bikes: "Bike Listings", rides: "Rides", users: "Users"
+    };
+
+    function showPanel(name){
+        navItems.forEach(n => n.classList.toggle("active", n.dataset.panel === name));
+        panels.forEach(p => p.classList.toggle("active", p.dataset.panel === name));
+        document.getElementById("panel-title").textContent = titleMap[name];
+        loadPanel(name);
+    }
+    navItems.forEach(n => n.addEventListener("click", () => showPanel(n.dataset.panel)));
+
+    async function loadPanel(name){
+        if(name === "overview") return renderOverview();
+        if(name === "join-requests") return renderJoinRequests();
+        if(name === "rent-requests") return renderRentRequests();
+        if(name === "bikes") return renderBikes();
+        if(name === "rides") return renderRides();
+        if(name === "users") return renderUsers();
+    }
+
+    /* ---------------- overview ---------------- */
+    async function renderOverview(){
+        const res = await RC_API.adminOverview();
+        if(!res.ok) return;
+        const c = res.counts;
+        document.getElementById("overview-grid").innerHTML = `
+            <div class="ov-card"><h2>${c.users}</h2><p>Total users</p></div>
+            <div class="ov-card"><h2>${c.rides}</h2><p>Community rides</p></div>
+            <div class="ov-card"><h2>${c.bikes}</h2><p>Bike listings</p></div>
+            <div class="ov-card alert"><h2>${c.pendingBikes + c.pendingJoinRequests + c.pendingRentRequests}</h2><p>Pending approvals</p></div>
+        `;
+        setNavCount("nav-count-join", c.pendingJoinRequests);
+        setNavCount("nav-count-rent", c.pendingRentRequests);
+        setNavCount("nav-count-bikes", c.pendingBikes);
+    }
+
+    function setNavCount(id, n){
+        const el = document.getElementById(id);
+        el.textContent = n;
+        el.style.display = n > 0 ? "inline-block" : "none";
+    }
+
+    /* ---------------- join requests ---------------- */
+    async function renderJoinRequests(){
+        const res = await RC_API.adminJoinRequests();
+        const tbody = document.querySelector("#join-requests-table tbody");
+        const rows = res.ok ? res.requests.slice().sort((a,b) => b.createdAt - a.createdAt) : [];
+        if(!rows.length){
+            tbody.innerHTML = `<tr><td colspan="5" class="empty-note">No join requests yet.</td></tr>`;
+            return;
+        }
+        tbody.innerHTML = rows.map(r => `
+            <tr data-id="${r.id}">
+                <td>${r.userName}<br><span style="color:var(--text-dim); font-size:12px;">${r.userEmail}</span></td>
+                <td>${r.rideTitle}</td>
+                <td>${fmtDate(r.createdAt)}</td>
+                <td>${statusBadge(r.status)}</td>
+                <td>${r.status === "pending" ? `
+                    <button class="a-btn approve" data-act="approve">Approve</button>
+                    <button class="a-btn reject" data-act="reject">Reject</button>
+                ` : "—"}</td>
+            </tr>`).join("");
+
+        tbody.querySelectorAll("button[data-act]").forEach(btn => {
+            btn.addEventListener("click", async () => {
+                const id = btn.closest("tr").dataset.id;
+                const act = btn.dataset.act;
+                btn.disabled = true;
+                if(act === "approve") await RC_API.adminApproveJoin(id);
+                else await RC_API.adminRejectJoin(id);
+                renderJoinRequests();
+                renderOverview();
+            });
+        });
+    }
+
+    /* ---------------- rent requests ---------------- */
+    async function renderRentRequests(){
+        const res = await RC_API.adminRentRequests();
+        const tbody = document.querySelector("#rent-requests-table tbody");
+        const rows = res.ok ? res.requests.slice().sort((a,b) => b.createdAt - a.createdAt) : [];
+        if(!rows.length){
+            tbody.innerHTML = `<tr><td colspan="6" class="empty-note">No rent requests yet.</td></tr>`;
+            return;
+        }
+        tbody.innerHTML = rows.map(r => `
+            <tr data-id="${r.id}">
+                <td>${r.userName}<br><span style="color:var(--text-dim); font-size:12px;">${r.userEmail}</span></td>
+                <td>${r.bikeName}</td>
+                <td>${r.days}</td>
+                <td>${fmtDate(r.createdAt)}</td>
+                <td>${statusBadge(r.status)}</td>
+                <td>${r.status === "pending" ? `
+                    <button class="a-btn approve" data-act="approve">Approve</button>
+                    <button class="a-btn reject" data-act="reject">Reject</button>
+                ` : "—"}</td>
+            </tr>`).join("");
+
+        tbody.querySelectorAll("button[data-act]").forEach(btn => {
+            btn.addEventListener("click", async () => {
+                const id = btn.closest("tr").dataset.id;
+                const act = btn.dataset.act;
+                btn.disabled = true;
+                if(act === "approve") await RC_API.adminApproveRent(id);
+                else await RC_API.adminRejectRent(id);
+                renderRentRequests();
+                renderOverview();
+            });
+        });
+    }
+
+    /* ---------------- bikes ---------------- */
+    async function renderBikes(){
+        const res = await RC_API.adminBikes();
+        const tbody = document.querySelector("#bikes-table tbody");
+        const rows = res.ok ? res.bikes.slice().sort((a,b) => (b.createdAt||0) - (a.createdAt||0)) : [];
+        if(!rows.length){
+            tbody.innerHTML = `<tr><td colspan="6" class="empty-note">No bikes listed yet.</td></tr>`;
+            return;
+        }
+        tbody.innerHTML = rows.map(b => `
+            <tr data-id="${b.id}">
+                <td>${b.name}<br><span style="color:var(--text-dim); font-size:12px;">${b.brand} · ${b.category}</span></td>
+                <td>${b.ownerName}</td>
+                <td>₹${b.price}</td>
+                <td>${b.city}</td>
+                <td>${statusBadge(b.status)}</td>
+                <td>
+                    ${b.status === "pending" ? `<button class="a-btn approve" data-act="approve">Approve</button><button class="a-btn reject" data-act="reject">Reject</button>` : ""}
+                    <button class="a-btn delete" data-act="delete">Delete</button>
+                </td>
+            </tr>`).join("");
+
+        tbody.querySelectorAll("button[data-act]").forEach(btn => {
+            btn.addEventListener("click", async () => {
+                const id = btn.closest("tr").dataset.id;
+                const act = btn.dataset.act;
+                btn.disabled = true;
+                if(act === "approve") await RC_API.adminApproveBike(id);
+                else if(act === "reject") await RC_API.adminRejectBike(id);
+                else if(act === "delete"){ if(!confirm("Delete this bike listing?")) { btn.disabled = false; return; } await RC_API.adminDeleteBike(id); }
+                renderBikes();
+                renderOverview();
+            });
+        });
+    }
+
+    /* ---------------- rides ---------------- */
+    async function renderRides(){
+        const res = await RC_API.adminRides();
+        const tbody = document.querySelector("#rides-table tbody");
+        const rows = res.ok ? res.rides : [];
+        if(!rows.length){
+            tbody.innerHTML = `<tr><td colspan="5" class="empty-note">No rides yet.</td></tr>`;
+            return;
+        }
+        tbody.innerHTML = rows.map(r => `
+            <tr data-id="${r.id}">
+                <td>${r.title}</td>
+                <td>${r.route || "—"}</td>
+                <td>${r.date || "—"}</td>
+                <td>${r.joined || 0} / ${r.capacity || 0}</td>
+                <td><button class="a-btn delete" data-act="delete">Delete</button></td>
+            </tr>`).join("");
+
+        tbody.querySelectorAll("button[data-act]").forEach(btn => {
+            btn.addEventListener("click", async () => {
+                const id = btn.closest("tr").dataset.id;
+                if(!confirm("Delete this ride? Existing join requests will remain in history.")) return;
+                btn.disabled = true;
+                await RC_API.adminDeleteRide(id);
+                renderRides();
+                renderOverview();
+            });
+        });
+    }
+
+    document.getElementById("new-ride-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector("button[type=submit]");
+        btn.disabled = true;
+        btn.textContent = "Creating…";
+        const res = await RC_API.adminCreateRide({
+            title: document.getElementById("nr-title").value.trim(),
+            club: document.getElementById("nr-club").value.trim(),
+            route: document.getElementById("nr-route").value.trim(),
+            difficulty: document.getElementById("nr-difficulty").value,
+            date: document.getElementById("nr-date").value.trim(),
+            duration: document.getElementById("nr-duration").value.trim(),
+            distanceKm: document.getElementById("nr-distance").value,
+            capacity: document.getElementById("nr-capacity").value,
+            about: document.getElementById("nr-about").value.trim()
+        });
+        btn.disabled = false;
+        btn.textContent = "Create Ride";
+        if(res.ok){
+            e.target.reset();
+            renderRides();
+            renderOverview();
+        } else {
+            alert(res.error || "Couldn't create ride.");
+        }
+    });
+
+    /* ---------------- users ---------------- */
+    async function renderUsers(){
+        const res = await RC_API.adminUsers();
+        const tbody = document.querySelector("#users-table tbody");
+        const rows = res.ok ? res.users : [];
+        tbody.innerHTML = rows.map(u => `
+            <tr data-id="${u.id}" data-email="${u.email}">
+                <td>${u.name}</td>
+                <td>${u.email}</td>
+                <td>${u.role === "admin" ? '<span class="tag-badge orange">Admin</span>' : '<span class="tag-badge blue">User</span>'}</td>
+                <td>
+                    ${u.role === "admin"
+                        ? `<button class="a-btn neutral" data-act="demote">Make User</button>`
+                        : `<button class="a-btn neutral" data-act="promote">Make Admin</button>`}
+                    <button class="a-btn delete" data-act="delete">Delete</button>
+                </td>
+            </tr>`).join("");
+
+        tbody.querySelectorAll("button[data-act]").forEach(btn => {
+            btn.addEventListener("click", async () => {
+                const row = btn.closest("tr");
+                const id = row.dataset.id;
+                const act = btn.dataset.act;
+                if(act === "delete"){
+                    if(row.dataset.email === ME.email){ alert("You can't delete your own account."); return; }
+                    if(!confirm("Delete this user?")) return;
+                    btn.disabled = true;
+                    await RC_API.adminDeleteUser(id);
+                } else {
+                    btn.disabled = true;
+                    await RC_API.adminSetUserRole(id, act === "promote" ? "admin" : "user");
+                }
+                renderUsers();
+                renderOverview();
+            });
+        });
+    }
+
+    /* ---------------- init ---------------- */
+    (async function init(){
+        if(!(await requireAdmin())) return;
+        renderOverview();
+    })();
+</script>
+</body>
+</html>

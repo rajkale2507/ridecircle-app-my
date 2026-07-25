@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — RideCircle</title>
+
+    <link rel="stylesheet" href="site.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+/* ==========================
+   CONTACT SECTION
+========================== */
+
+
+.contact{
+    width:100%;
+    padding:140px 8% 80px;
+}
+
+.contact-title{
+    text-align:left;
+    margin-bottom:35px;
+}
+
+.contact-title h1{
+    font-size:42px;
+    font-weight:700;
+    color:#fff;
+}
+
+.contact-title h1 span{
+    color:#ff8c00;
+}
+
+.contact-title p{
+    margin-top:10px;
+    font-size:16px;
+    color:#a8a8a8;
+}
+/* ==========================
+   LAYOUT
+========================== */
+
+.contact-container{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:35px;
+    align-items:flex-start;
+}
+
+/* ==========================
+   CONTACT FORM
+========================== */
+
+.contact-form{
+    background:#161616;
+    padding:25px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.08);
+}
+.contact-form h2{
+    font-size:30px;
+    margin-bottom:30px;
+}
+
+.row{
+    display:flex;
+    gap:20px;
+}
+
+.input-box{
+    width:100%;
+    margin-bottom:15px;
+}
+
+.input-box label{
+    display:block;
+    color:#b5b5b5;
+    font-size:13px;
+    margin-bottom:8px;
+    letter-spacing:1px;
+}
+
+.input-box input,
+.input-box textarea{
+    width:100%;
+    background:#1f1f1f;
+    border:1px solid #2d2d2d;
+    color:white;
+    padding:12px 15px;
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+    transition:.3s;
+}
+
+.input-box textarea{
+    resize:none;
+}
+
+.input-box input:focus,
+.input-box textarea:focus{
+    border:1px solid #ff8c00;
+}
+
+.input-box input::placeholder,
+.input-box textarea::placeholder{
+    color:#888;
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+.send{
+    width:100%;
+    background:#ff8c00;
+    color:white;
+    border:none;
+    padding:13px;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.send:hover{
+    background:#ff9d1f;
+    transform:translateY(-2px);
+}
+
+/*==============================
+ CONTACT INFO
+===============================*/
+
+.contact-info{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.box{
+    background:#161616;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:15px;
+    padding:16px 18px;      /* Reduced from 22px */
+    display:flex;
+    align-items:center;
+    gap:14px;               /* Reduced from 18px */
+    transition:.35s;
+}
+
+.box:hover{
+    transform:translateY(-6px);
+    border-color:#ff8c00;
+    box-shadow:0 15px 35px rgba(255,140,0,.15);
+}
+
+.box small{
+    color:#9d9d9d;
+    display:block;
+    margin-bottom:6px;
+    font-size:12px;
+}
+
+.box h3{
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    line-height:1.4;
+}
+
+/*==============================
+ ICONS
+===============================*/
+
+.icon{
+    width:50px;
+    height:50px;
+    border-radius:12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:18px;
+    flex-shrink:0;
+}
+
+.blue{
+    background:rgba(52,152,219,.18);
+    color:#4aa8ff;
+}
+
+.green{
+    background:rgba(46,204,113,.18);
+    color:#2ecc71;
+}
+
+.orange{
+    background:rgba(255,140,0,.18);
+    color:#ff8c00;
+}
+
+.purple{
+    background:rgba(155,89,182,.18);
+    color:#b86cff;
+}
+
+/*==============================
+ SUPPORT CARD
+===============================*/
+
+.online{
+    background:#161616;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    padding:22px;
+    color:white;
+    margin-top:10px;
+}
+.online:hover{
+    border-color:#ff8c00;
+    box-shadow:0 12px 25px rgba(255,140,0,.15);
+}
+.online h3{
+    font-size:20px;
+    margin-bottom:10px;
+    color:white;
+}
+.online p{
+    font-size:15px;
+    line-height:1.7;
+}
+
+.online b{
+    color:#fff;
+}
+
+/*==============================
+ INPUT HOVER
+===============================*/
+
+.input-box input:hover,
+.input-box textarea:hover{
+    border-color:#ff8c00;
+}
+
+/*==============================
+ RESPONSIVE
+===============================*/
+
+@media(max-width:1100px){
+
+.contact-container{
+    grid-template-columns:1fr;
+}
+
+.contact-info{
+    margin-top:35px;
+}
+
+}
+
+@media(max-width:768px){
+
+header{
+    flex-direction:column;
+    gap:15px;
+    padding:18px;
+}
+
+nav{
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px;
+}
+
+.buttons{
+    margin-top:10px;
+}
+
+.contact{
+    padding:180px 20px 70px;
+}
+
+.contact-title h1{
+    font-size:42px;
+}
+
+.contact-title p{
+    font-size:16px;
+}
+.contact-form{
+    padding:25px;
+}
+
+.row{
+    flex-direction:column;
+    gap:0;
+}
+
+.box{
+    padding:18px;
+}
+
+.icon{
+    width:55px;
+    height:55px;
+    font-size:20px;
+}
+
+.online{
+    padding:22px;
+}
+
+}
+
+@media(max-width:500px){
+
+.logo{
+    font-size:24px;
+}
+
+nav a{
+    font-size:14px;
+}
+
+.login,
+.signup{
+    padding:8px 18px;
+    font-size:14px;
+}
+
+.title h1{
+    font-size:34px;
+}
+
+.contact-form h2{
+    font-size:24px;
+}
+
+.send{
+    font-size:16px;
+}
+
+.box h3{
+    font-size:16px;
+}
+
+.online h3{
+    font-size:20px;
+}
+
+}
+
+/*==========================
+        FAQ
+==========================*/
+
+.faq{
+    width:100%;
+    padding:70px 8%;
+}
+
+.faq-title{
+    width:100%;
+    max-width:700px;
+    margin-bottom:30px;
+}
+
+.faq-title h2{
+    font-size:42px;
+    color:#fff;
+    font-weight:700;
+}
+
+.faq-title span{
+    color:#ff8c00;
+}
+
+.faq-container{
+    width:100%;
+    max-width:700px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.faq-item{
+    width:100%;
+    background:#181414;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    overflow:hidden;
+}
+
+.faq-question{
+    width:100%;
+    background:none;
+    border:none;
+    padding:18px 22px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    color:#fff;
+    font-size:16px;
+    font-weight:500;
+
+    cursor:pointer;
+}
+
+.faq-question i{
+    color:#ff8c00;
+    font-size:14px;
+    transition:.3s;
+}
+
+.faq-answer{
+    max-height:0;
+    overflow:hidden;
+    transition:all .4s ease;
+}
+
+.faq-answer p{
+    padding:0 25px 20px;
+    color:#bdbdbd;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.faq-item.active .faq-answer{
+    max-height:200px;
+}
+
+.faq-item.active .faq-question i{
+    transform:rotate(180deg);
+}
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo"><i class="fa-solid fa-circle"></i>RideCircle</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="live-tracking-combined.html">Live Tracking</a>
+        <a href="bike-rentals-combined.html">Bike Rentals</a>
+        <a href="community-combined.html">Community</a>
+        <a href="about-combined.html">About</a>
+        <a href="contact-combined.html" class="active">Contact</a>
+    </nav>
+    <div class="buttons">
+        <a href="login-combined.html" class="login">Login</a>
+        <a href="login-combined.html" class="signup">Sign Up</a>
+    </div>
+</header>
+
+<!--================ CONTACT ================-->
+
+<section class="contact">
+
+<div class="contact-title">
+
+<h1>
+
+Get in <span>Touch</span>
+
+</h1>
+
+<p>
+
+We ride for our community.
+Your feedback is our fuel.
+
+</p>
+
+</div>
+
+<div class="contact-container">
+
+<!-- LEFT -->
+
+<div class="contact-form">
+
+<h2>
+
+Send a Message
+
+</h2>
+
+<div id="contact-alert" style="display:none; padding:12px 16px; border-radius:10px; font-size:13px; margin-bottom:18px;"></div>
+
+<form id="contact-form">
+
+<div class="row">
+
+<div class="input-box">
+
+<label>
+
+FULL NAME
+
+</label>
+
+<input
+type="text"
+id="c-name"
+placeholder="Arjun Singh"
+required>
+
+</div>
+
+<div class="input-box">
+
+<label>
+
+EMAIL ADDRESS
+
+</label>
+
+<input
+type="email"
+id="c-email"
+placeholder="arjun@example.com"
+required>
+
+</div>
+
+</div>
+
+<div class="input-box">
+
+<label>
+
+SUBJECT
+
+</label>
+
+<input
+type="text"
+id="c-subject"
+placeholder="How can we help?"
+required>
+
+</div>
+
+<div class="input-box">
+
+<label>
+
+MESSAGE
+
+</label>
+
+<textarea
+rows="5"
+id="c-message"
+placeholder="Tell us about your experience or question..."
+required></textarea>
+
+</div>
+
+<button class="send" type="submit">
+
+Send Message
+
+</button>
+
+</form>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="contact-info">
+
+<div class="box">
+
+<div class="icon blue">
+
+<i class="fa-solid fa-envelope"></i>
+
+</div>
+
+<div>
+
+<small>Email</small>
+
+<h3>
+
+support@ridecircle.app
+
+</h3>
+
+</div>
+
+</div>
+
+<div class="box">
+
+<div class="icon green">
+
+<i class="fa-solid fa-phone"></i>
+
+</div>
+
+<div>
+
+<small>Phone</small>
+
+<h3>
+
++91 98765 43210
+
+</h3>
+
+</div>
+
+</div>
+
+<div class="box">
+
+<div class="icon orange">
+
+<i class="fa-solid fa-location-dot"></i>
+
+</div>
+
+<div>
+
+<small>
+
+Headquarters
+
+</small>
+
+<h3>
+
+Pune,
+maharashtra,
+India
+
+</h3>
+
+</div>
+
+</div>
+
+<div class="box">
+
+<div class="icon purple">
+
+<i class="fa-solid fa-clock"></i>
+
+</div>
+
+<div>
+
+<small>
+
+Support Hours
+
+</small>
+
+<h3>
+
+Mon-Sat,
+9am-7pm IST
+
+</h3>
+
+</div>
+
+</div>
+
+<div class="online">
+
+<h3>
+
+🟢 Support Online
+
+</h3>
+
+<p>
+
+Average response time:
+<b>
+
+under 2 hours
+
+</b>
+
+on weekdays.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!--================ FAQ SECTION ================-->
+
+<section class="faq">
+
+    <div class="faq-title">
+
+        <h2>
+            Frequently Asked <span>Questions</span>
+        </h2>
+
+    </div>
+
+    <div class="faq-container">
+
+        <!-- FAQ 1 -->
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                <span>How does live tracking work?</span>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <p>
+                   RideCircle uses your device's GPS to broadcast your
+            location to group members in real-time, updating every
+            5 seconds for precision accuracy throughout your ride.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- FAQ 2 -->
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                <span>Can I use it without cellular signal?</span>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <p>
+                    Yes. Download route data before your ride via our
+            offline maps feature. Your ride gets tracked locally
+            and syncs to the cloud once you regain connectivity.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- FAQ 3 -->
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                <span>How does bike rental work?</span>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <p>
+                    Browse available bikes, select pickup dates, and
+            complete payment in-app. Bikes can be picked up
+            from designated hubs or delivered to your location
+            for an additional fee.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- FAQ 4 -->
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                <span>Can I rent motorcycles through RideCircle?</span>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <p>
+                    Yes. Browse available motorcycles, apply filters,
+                    and book directly from the Bike Rentals section.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- FAQ 5 -->
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                <span>Is my live location secure?</span>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <p>
+                    Yes. Your location is only shared with riders you
+                    choose and is protected using secure communication.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--=============== FOOTER ===============-->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <!-- Left -->
+
+        <div class="footer-col">
+
+            <h2 class="footer-logo">
+                <span>Ride</span>Circle
+            </h2>
+
+            <p>
+                The premium biking community for group rides,
+                live tracking, and adventure exploration worldwide.
+            </p>
+
+            <div class="social-icons">
+
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+
+            </div>
+
+        </div>
+
+        <!-- Platform -->
+
+        <div class="footer-col">
+
+            <h3>PLATFORM</h3>
+
+            <a href="live-tracking-combined.html">Live Tracking</a>
+            <a href="bike-rentals-combined.html">Bike Rentals</a>
+            <a href="community-combined.html">Community Rides</a>
+            <a href="rentor-combined.html">List Your Bike</a>
+            <a href="#">Route Planner</a>
+            <a href="#">Ride History</a>
+
+        </div>
+
+        <!-- Company -->
+
+        <div class="footer-col">
+
+            <h3>COMPANY</h3>
+
+            <a href="about-combined.html">About Us</a>
+            <a href="contact-combined.html">Contact</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+            <a href="#">Blog</a>
+
+        </div>
+
+        <!-- App -->
+
+        <div class="footer-col app">
+
+            <h3>GET THE APP</h3>
+
+            <p>
+                Track rides on the go. Available on iOS and Android.
+            </p>
+
+            <button class="store-btn">
+                <i class="fa-brands fa-apple"></i>
+                App Store
+            </button>
+
+            <button class="store-btn">
+                <i class="fa-brands fa-google-play"></i>
+                Google Play
+            </button>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 RideCircle Technologies Pvt. Ltd. All rights reserved.
+        </p>
+
+        <div class="footer-links">
+
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+
+        </div>
+
+    </div>
+
+</footer>
+<script src="api.js"></script>
+<script src="auth.js"></script>
+<script src="script.js"></script>
+<script>
+document.getElementById("contact-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const alertBox = document.getElementById("contact-alert");
+    const btn = e.target.querySelector(".send");
+
+    const name = document.getElementById("c-name").value.trim();
+    const email = document.getElementById("c-email").value.trim();
+    const subject = document.getElementById("c-subject").value.trim();
+    const message = document.getElementById("c-message").value.trim();
+
+    if (!name || !email || !subject || !message) {
+        alertBox.textContent = "Please fill in every field before sending.";
+        alertBox.style.cssText = "display:block; padding:12px 16px; border-radius:10px; font-size:13px; margin-bottom:18px; background:rgba(248,113,113,.12); color:#f87171;";
+        return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+
+    setTimeout(() => {
+        alertBox.textContent = `Thanks ${name} — your message has been received. Our team will reply to ${email} within 2 hours.`;
+        alertBox.style.cssText = "display:block; padding:12px 16px; border-radius:10px; font-size:13px; margin-bottom:18px; background:rgba(74,222,128,.12); color:#4ade80;";
+        e.target.reset();
+        btn.disabled = false;
+        btn.textContent = "Send Message";
+    }, 600);
+});
+</script>
+
+</body>
+</html>

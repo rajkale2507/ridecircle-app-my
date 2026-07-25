@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login — RideCircle</title>
+
+    <link rel="stylesheet" href="site.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,140,0,.08), transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(59,130,246,.08), transparent 40%),
+        var(--bg);
+}
+
+.admin-login-card{
+    width:100%;
+    max-width:400px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:44px 36px;
+    text-align:center;
+}
+
+.admin-login-card .icon-badge{
+    width:56px; height:56px;
+    border-radius:16px;
+    background:rgba(255,140,0,.12);
+    color:var(--orange);
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px;
+    margin:0 auto 18px;
+}
+
+.admin-login-card h1{ font-size:22px; margin-bottom:6px; }
+.admin-login-card p.sub{ color:var(--text-dim); font-size:13px; margin-bottom:28px; }
+
+.a-input-box{ margin-bottom:16px; text-align:left; }
+.a-input-box label{ display:block; font-size:11px; letter-spacing:1px; color:var(--text-dim); margin-bottom:6px; }
+.a-input-box input{
+    width:100%;
+    background:#0d0d0d;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px 14px;
+    color:white;
+    font-size:14px;
+    outline:none;
+}
+.a-input-box input:focus{ border-color:var(--orange); }
+
+.a-submit{
+    width:100%;
+    padding:13px;
+    background:var(--orange);
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:6px;
+    transition:.25s;
+}
+.a-submit:hover{ background:#ff9d1f; }
+.a-submit:disabled{ opacity:.6; cursor:default; }
+
+.a-alert{
+    text-align:left;
+    padding:10px 14px;
+    border-radius:10px;
+    font-size:13px;
+    margin-bottom:16px;
+}
+.a-alert.error{ background:rgba(248,113,113,.12); color:#f87171; }
+.a-alert.ok{ background:rgba(74,222,128,.12); color:#4ade80; }
+
+.back-home{
+    display:inline-block;
+    margin-top:22px;
+    color:var(--text-dim);
+    font-size:13px;
+    text-decoration:none;
+}
+.back-home:hover{ color:white; }
+    </style>
+</head>
+
+<body>
+
+<div class="admin-login-card">
+    <div class="icon-badge"><i class="fa-solid fa-shield-halved"></i></div>
+    <h1>Admin Console</h1>
+    <p class="sub">Sign in with an administrator account to manage RideCircle.</p>
+
+    <div id="a-alert" class="a-alert" style="display:none;"></div>
+
+    <form id="admin-login-form">
+        <div class="a-input-box">
+            <label>EMAIL</label>
+            <input type="email" id="a-email" placeholder="admin@ridecircle.com" required>
+        </div>
+        <div class="a-input-box">
+            <label>PASSWORD</label>
+            <input type="password" id="a-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="a-submit">Sign In</button>
+    </form>
+
+    <a href="index.html" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to RideCircle</a>
+</div>
+
+<script src="api.js"></script>
+<script>
+    const form = document.getElementById("admin-login-form");
+    const alertBox = document.getElementById("a-alert");
+
+    function showAlert(msg, ok){
+        alertBox.textContent = msg;
+        alertBox.style.display = "block";
+        alertBox.className = "a-alert" + (ok ? " ok" : " error");
+    }
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector(".a-submit");
+        btn.disabled = true;
+        btn.textContent = "Signing in…";
+
+        const res = await RC_API.login(
+            document.getElementById("a-email").value,
+            document.getElementById("a-password").value
+        );
+
+        if(!res.ok){
+            btn.disabled = false;
+            btn.textContent = "Sign In";
+            showAlert(res.error, false);
+            return;
+        }
+
+        if(res.user.role !== "admin"){
+            await RC_API.logout();
+            btn.disabled = false;
+            btn.textContent = "Sign In";
+            showAlert("This account doesn't have admin access.", false);
+            return;
+        }
+
+        showAlert("Signed in — redirecting…", true);
+        setTimeout(() => window.location.href = "admin-dashboard.html", 400);
+    });
+
+    // if already logged in as admin, skip straight to dashboard
+    (async () => {
+        const res = await RC_API.me();
+        if(res.ok && res.user && res.user.role === "admin"){
+            window.location.href = "admin-dashboard.html";
+        }
+    })();
+</script>
+</body>
+</html>
